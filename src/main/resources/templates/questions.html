@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Survey Monkey</title>
+</head>
+<body>
+<form action="/viewSurvey" method="post">
+<p th:each="question:${questions}">
+    <label>Enter question: </label>
+    <input type="text " th:field="*{question.question}">
+    <label>Enter question type: </label>
+    <input type="text " th:field="*{question.type}">
+    <label>Enter question options: </label>
+    <input type="text " th:field="*{question.options}">
+</p>
+    <input type="submit" value="Create survey questions!">
+</form>
+</body>
+</html>
