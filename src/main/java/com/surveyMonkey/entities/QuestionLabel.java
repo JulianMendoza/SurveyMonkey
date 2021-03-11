@@ -17,6 +17,9 @@ public class QuestionLabel {
     public QuestionLabel(){
 
     }
+    public QuestionLabel(long id){
+        this.id=id;
+    }
     public void setId(Long id) {
         this.id = id;
     }

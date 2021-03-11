@@ -5,16 +5,15 @@
     <title>Survey Monkey</title>
 </head>
 <body>
-<form action="/viewSurvey" method="post">
-<p th:each="question:${questions}">
-    <label>Enter question: </label>
-    <input type="text " th:field="*{question.question}">
-    <label>Enter question type: </label>
-    <input type="text " th:field="*{question.type}">
-    <label>Enter question options: </label>
-    <input type="text " th:field="*{question.options}">
-</p>
-    <input type="submit" value="Create survey questions!">
+<form action="#" th:action="@{/survey}" th:object="${addQuestion}" method="post">
+    <label for="question">Enter question: </label>
+    <input type="text" id="question" th:field="*{question}"><br>
+    <label for="type">Enter question type: </label>
+    <input type="text" id="type" th:field="*{type}"><br>
+    <label for="options">Enter question options: </label>
+    <input type="text " id="options" th:field="*{options}"><br>
+    <input type="hidden" id="id" th:field="*{id}"><br>
+    <input type="submit" value="Create survey question!">
 </form>
 </body>
 </html>
