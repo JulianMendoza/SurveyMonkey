@@ -14,10 +14,13 @@ public class Survey {
     private HashMap <Question, List<Answer>> survey;
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Answer> answers;
-    private String surveyString;
+    private String title;
     public Survey(){
-        surveyString="testSurvey";
-        answers=new ArrayList<>();
+        this("");
+    }
+    public Survey(String title){
+        this.title=title;
+        answers = new ArrayList<>();
         survey = new HashMap<>();
     }
     public void setQuestion(Question q){
@@ -55,11 +58,11 @@ public class Survey {
         this.answers = answers;
     }
 
-    public String getSurveyString() {
-        return surveyString;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSurveyString(String surveyString) {
-        this.surveyString = surveyString;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
