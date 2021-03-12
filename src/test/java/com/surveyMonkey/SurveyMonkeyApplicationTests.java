@@ -1,4 +1,4 @@
-package com.SurveyMonkey;
+package com.surveyMonkey;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
