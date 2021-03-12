@@ -8,16 +8,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class AdminController {
     @Autowired
     private SurveyRepository surveyRepository;
-    @GetMapping({"/home"})
+    @GetMapping({"/"})
     public String home(Model model){
+
         return "index";
     }
-    @GetMapping({"/surveyTest","/"})
+    @GetMapping({"/surveyTest","/home"})
     public String createSurvey(){
+
         return "creation";
     }
     @GetMapping({"/surveyQuestions"})
@@ -58,4 +63,11 @@ public class AdminController {
             model.addAttribute("addQuestion",new QuestionLabel());
             return "questions";
     }
+
+    @PostMapping({"/surveyResults"})
+    public String surveyResult(){
+
+            return "results";
+    }
+
 }

@@ -8,7 +8,7 @@
 <p>
     Survey: <span th:text="${title}"></span>
 </p>
-<form action="#" th:action="@{/survey}" th:object="${addQuestion}" method="post">
+<form action="/surveyResults" th:object="${addQuestion}" method="post">
     <label for="question">Enter question: </label>
     <input type="text" id="question" th:field="*{question}"><br>
     <label for="type">Enter question type: </label>
