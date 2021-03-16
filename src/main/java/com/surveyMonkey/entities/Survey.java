@@ -27,7 +27,6 @@ public class Survey {
         survey.put(q,new ArrayList<>());
     }
     public void removeQuestion(){
-
     }
     public void setAnswer(Question q,Answer a){
         answers.add(a);
