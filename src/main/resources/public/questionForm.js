@@ -1,26 +1,85 @@
-let x = 0;
+let x = 0; //number of questions that the user wants to add
+/**
+ * adds the div to create a new question
+ * @param val the number of questions that will be additionally added to the div
+ */
 function appendDiv(val){
     for (let i = x; i < x+val; i++) {
+        //very messy can be easily refactored using DOM
         let q="question-div"+i;
         let q1="question"+i;
+        let s="selection-div"+i;
         $("#question-section").append(
             "<div id="+q+">"+
-            "<label htmlFor=\"question\">Enter question:</label>" +
+            "<label for=\"question\">Enter question:</label>" +
             "<input type=\"text\" id="+q1+"><br>" +
-            "<label htmlFor=\"type\">Enter question type: </label>" +
-            "<select id=\"type\">" +
+            "<label for=\"type\">Select question type: </label>" +
+            "<div id="+s+">"+
+            "<select id='type"+i+"'>" +
             "<option value=\"Histogram\">Histogram</option>" +
             "<option value=\"Open Ended\">Open Ended</option>" +
             "<option value=\"Option\">Option</option>" +
             "</select><br>"+
+            "</div>"+
             "</div>");
+        //event handler for selection change
+        $("#type"+i).change((e)=>{
+            //options should be wrapped in a single div but since DOM wasn't used this is a workaround
+            //remove any existing option (if any) underneath the selection so it doesn't over populate the view
+            if($("#"+s).find($("#option")).length){
+                $("#"+s).find($("#option")).remove();
+                if($("#"+s).find($("#options")).length){
+                    $("#"+s).find($("#options")).remove();
+                }
+            }else if($("#"+s).find($("#histogram")).length){
+                $("#"+s).find($("#histogram")).remove();
+            }
+            switch($("select#type"+i).val()){
+                case "Histogram":
+                    $("#"+s).append(
+                        "<div id='histogram'>"+
+                        "<label for=\"min\">Enter minimum value:</label>"+
+                        "<input type=\"number\" id='min' ><br>" +
+                        "<label for=\"max\">Enter maximum value: </label>"+
+                        "<input type=\"number\" id='max' ><br>" +
+                        "<label for=\"step\">Enter step size: </label>"+
+                        "<input type=\"number\" id='step' ><br>"+
+                        "</div>"
+                    );
+                    break;
+                case "Option":
+                    $("#"+s).append(
+                        "<div id='option'>"+
+                        "<input type=\"number\" min=\"1\" max=\"15\" step=\"1\" id=\"numOptions\"/>"+
+                        "<button id='button"+i+"'>Change options</button>"+
+                        "</div>"
+                    );
+                    //Event handler for buttons similar to the original questions
+                    $("#button"+i).click(()=>{
+                        let num=parseInt($("#"+s).find($("#numOptions")).val());
+                        let d = document.createElement("div");
+                        $(d).attr('id','options');
+                        for(let i=0;i<num;i++){
+                            $(d).append(
+                                "<label for='option'"+i+">Option "+i+"</label>"+
+                                "<input type='text' id='option'"+i+" ><br>"
+                            );
+                        }
+                        $("#"+s).append($(d));
+                        }
+                    );
+                    break;
+            }
+        });
     }
 }
+//delete divs that are over the requested value
 function deleteDiv(val){
     for (let i = x; i >=val; i--) {
         $("#question-section").find($("#question-div"+i)).remove();
     }
 }
+//onload handler
 $(document).ready(()=> {
     $("#generateQuestions").click(() => {
         let num = parseInt($("#numQuestions").val());
