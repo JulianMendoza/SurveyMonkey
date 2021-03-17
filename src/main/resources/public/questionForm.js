@@ -16,8 +16,8 @@ function appendDiv(val){
             "<label for=\"type\">Select question type: </label>" +
             "<div id="+s+">"+
             "<select id='type"+i+"'>" +
-            "<option value=\"Histogram\">Histogram</option>" +
             "<option value=\"Open Ended\">Open Ended</option>" +
+            "<option value=\"Histogram\">Histogram</option>" +
             "<option value=\"Option\">Option</option>" +
             "</select><br>"+
             "</div>"+
@@ -26,14 +26,9 @@ function appendDiv(val){
         $("#type"+i).change((e)=>{
             //options should be wrapped in a single div but since DOM wasn't used this is a workaround
             //remove any existing option (if any) underneath the selection so it doesn't over populate the view
-            if($("#"+s).find($("#option")).length){
-                $("#"+s).find($("#option")).remove();
-                if($("#"+s).find($("#options")).length){
-                    $("#"+s).find($("#options")).remove();
-                }
-            }else if($("#"+s).find($("#histogram")).length){
-                $("#"+s).find($("#histogram")).remove();
-            }
+            $("#"+s).find($("#options")).remove();
+            $("#"+s).find($("#option-input"+i)).remove();
+            $("#"+s).find($("#histogram")).remove();
             switch($("select#type"+i).val()){
                 case "Histogram":
                     $("#"+s).append(
@@ -49,23 +44,26 @@ function appendDiv(val){
                     break;
                 case "Option":
                     $("#"+s).append(
-                        "<div id='option'>"+
+                        "<form onsubmit=\"return(false)\" id='option-input"+i+"'>"+
                         "<input type=\"number\" min=\"1\" max=\"15\" step=\"1\" id=\"numOptions\"/>"+
                         "<button id='button"+i+"'>Change options</button>"+
-                        "</div>"
+                        "</form>"
                     );
                     //Event handler for buttons similar to the original questions
-                    $("#button"+i).click(()=>{
-                        let num=parseInt($("#"+s).find($("#numOptions")).val());
-                        let d = document.createElement("div");
-                        $(d).attr('id','options');
-                        for(let i=0;i<num;i++){
-                            $(d).append(
-                                "<label for='option'"+i+">Option "+i+"</label>"+
-                                "<input type='text' id='option'"+i+" ><br>"
-                            );
-                        }
-                        $("#"+s).append($(d));
+                    $("#button"+i).click(()=> {
+                            let num = parseInt($("#option-input" + i).find($("input")).val());
+                            if (num > 0 && num <= 15) {
+                                $("#" + s).find("#options").remove();
+                                let d = document.createElement("div");
+                                $(d).attr('id', 'options');
+                                for (let i = 0; i < num; i++) {
+                                    $(d).append(
+                                        "<label for='option" + i + "'>Option " + i + "</label>" +
+                                        "<input type='text' id='option" + i + "' ><br>"
+                                    );
+                                }
+                                $("#" + s).append($(d));
+                            }
                         }
                     );
                     break;
