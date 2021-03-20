@@ -5,10 +5,7 @@ import com.surveyMonkey.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -62,6 +59,15 @@ public class AdminController {
         }
             model.addAttribute("addQuestion",new QuestionLabel());
             return "questions";
+    }
+
+    @GetMapping("/survey/{surveyId}")
+    public String showSurvey(@PathVariable String surveyId, Model model){
+        Survey survey = surveyRepository.findById(Long.parseLong(surveyId));
+        model.addAttribute("survey", survey);
+        return "show";
+
+
     }
 
     @PostMapping({"/surveyResults"})

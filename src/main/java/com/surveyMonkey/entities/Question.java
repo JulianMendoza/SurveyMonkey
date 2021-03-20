@@ -10,6 +10,7 @@ public abstract class Question {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
+
     public Question(){
 
     }

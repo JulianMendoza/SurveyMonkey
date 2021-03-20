@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Survey Monkey</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="jquery.min.js"></script>
+
+</head>
+<body>
+  <div class="container mt-5 pt-5">
+    <div class="row">
+        <h1 th:text="${survey.title}"></h1>
+    </div>
+
+<div class="row">
+  <form>
+
+        <div th:each="instance : ${survey.survey}">
+
+              <div th:switch="${instance.key.type}">
+
+                <div th:case="'OpenEndedQuestion'" class="form-group">
+                  <label th:text="${instance.key.title}" th:for="${instance.key}"></label>
+                  <input th:id="${instance.key}" type="text" class="form-control"  placeholder="Type your answer" >
+                </div>
+
+                <div th:case="'OptionQuestion'" class="form-group">
+                  <label th:text="${instance.key.title} Select from the options below" th:for="${instance.key}"></label>
+                  <select th:each="option : ${instance.key.options}" class="form-group" th:id="${instance.key}">
+                      <option th:value="${option}"></option>
+                  </select>
+                </div>
+
+                <div th:case="'HistoQuestion'" class="form-group">
+
+                </div>
+
+              </div>
+        </div>
+</form>
+
+</div>
+
+
+  </div>
+
+</body>
+</html>
