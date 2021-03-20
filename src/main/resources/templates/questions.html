@@ -3,27 +3,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <head>
     <title>Survey Monkey</title>
+
+    <script src="jquery.min.js"></script>
+    <script src="questionForm.js"></script>
+    <script></script>
 </head>
 <body>
 <p>
     Survey: <span th:text="${title}"></span>
 </p>
-<form action="/surveyResults" th:object="${addQuestion}" method="post">
-    <label for="question">Enter question: </label>
-    <input type="text" id="question" th:field="*{question}"><br>
-    <label for="type">Enter question type: </label>
-    <select id="type" th:field="*{type}">
-        <option th:value="'Histogram'" th:text="'Histogram'"></option>
-        <option th:value="'Open Ended'" th:text="'Open Ended'"></option>
-        <option th:value="'Option'" th:text="'Option'"></option>
-    </select>   <br>
-
-    <label for="options">Enter question options: </label>
-    <input type="text" id="options" th:field="*{options}"><br>
-    <input type="hidden" id="id" th:field="*{id}">
-    <input type="hidden" id="title" name="title" th:value="${title}">
-    <input type="submit" value="Create survey question!">
+<form onsubmit="return(false)">
+<label for="numQuestions">Enter the amount of questions</label><br>
+<input type="number" min="1" max="15" step="1" id="numQuestions"/>
+    <button id="generateQuestions">Change questions</button>
 </form>
-
+<div id="question-section">
+</div>
 </body>
 </html>
