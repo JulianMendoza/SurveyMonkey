@@ -15,6 +15,8 @@ public class Survey {
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Answer> answers;
     private String title;
+    private String surveyCode;
+    private String surveyPassword;
     public Survey(){
         this("");
     }
@@ -63,5 +65,21 @@ public class Survey {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSurveyCode() {
+        return surveyCode;
+    }
+
+    public void setSurveyCode(String surveyCode) {
+        this.surveyCode = surveyCode;
+    }
+
+    public String getSurveyPassword() {
+        return surveyPassword;
+    }
+
+    public void setSurveyPassword(String surveyPassword) {
+        this.surveyPassword = surveyPassword;
     }
 }

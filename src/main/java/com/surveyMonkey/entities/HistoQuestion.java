@@ -1,16 +1,43 @@
 package com.surveyMonkey.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 
 @Entity
 public class HistoQuestion extends Question {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-    public HistoQuestion(){
+    private int minVal;
+    private int maxVal;
 
+    public int getMinVal() {
+        return minVal;
+    }
+
+    public void setMinVal(int minVal) {
+        this.minVal = minVal;
+    }
+
+    public int getMaxVal() {
+        return maxVal;
+    }
+
+    public void setMaxVal(int maxVal) {
+        this.maxVal = maxVal;
+    }
+
+    public int getStepSize() {
+        return stepSize;
+    }
+
+    public void setStepSize(int stepSize) {
+        this.stepSize = stepSize;
+    }
+
+    private int stepSize;
+    public HistoQuestion() {
+
+    }
+    @Override
+    public String toString(){
+        return "hello world";
     }
 }
