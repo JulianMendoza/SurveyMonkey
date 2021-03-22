@@ -33,7 +33,7 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question1 = (Question) o;
-        return id.equals(question1.id) && question.equals(question1.question);
+        return question.equals(question1.question);
     }
 
     @Override

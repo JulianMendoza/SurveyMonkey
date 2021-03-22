@@ -127,7 +127,8 @@ function createJson(){
         "password": "",
         "questions": []
     };
-    survey["title"]=$("span").innerHTML;
+    console.log($("#title").html());
+    survey["title"]=$("#title").html();
     survey["password"]=$("#password").val();
     for(let i=0;i<x;i++){
         survey["questions"].push(questionTypeHelper(i));

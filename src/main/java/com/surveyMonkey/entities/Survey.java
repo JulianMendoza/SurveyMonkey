@@ -15,6 +15,10 @@ public class Survey {
     private String title;
     private String surveyCode;
     private String surveyPassword;
+    public Survey() {
+        this("","");
+        survey = new HashMap<>();
+    }
     public Survey(String title){
         this(title,"");
     }
@@ -25,8 +29,6 @@ public class Survey {
     }
     public void setQuestion(Question q){
         survey.put(q,new ArrayList<>());
-    }
-    public void removeQuestion(){
     }
     public void setAnswer(Question q,Answer a){
         List<Answer> val=survey.get(q);
@@ -72,5 +74,8 @@ public class Survey {
 
     public void setSurveyPassword(String surveyPassword) {
         this.surveyPassword = surveyPassword;
+    }
+    public ArrayList<Question> getQuestions(){
+        return new ArrayList<>(survey.keySet());
     }
 }

@@ -19,7 +19,6 @@ public class AdminController {
     private SurveyRepository surveyRepository;
     @GetMapping({"/"})
     public String home(Model model){
-
         return "index";
     }
     @GetMapping({"/surveyTest","/home"})
@@ -37,7 +36,6 @@ public class AdminController {
     public String listSurvey(@RequestParam("title") String title,Model model) {
             return "questions";
     }
-
     @PostMapping({"/surveyResults"})
     public String surveyResult(){
             return "results";
