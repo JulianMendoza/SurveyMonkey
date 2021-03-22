@@ -7,7 +7,13 @@ import javax.persistence.Entity;
 public class HistoQuestion extends Question {
     private int minVal;
     private int maxVal;
-
+    private int stepSize;
+    public HistoQuestion(String question,int minVal,int maxVal,int stepSize){
+        super(question);
+        setMinVal(minVal);
+        setMaxVal(maxVal);
+        setStepSize(stepSize);
+    }
     public int getMinVal() {
         return minVal;
     }
@@ -32,12 +38,11 @@ public class HistoQuestion extends Question {
         this.stepSize = stepSize;
     }
 
-    private int stepSize;
     public HistoQuestion() {
 
     }
     @Override
     public String toString(){
-        return "hello world";
+        return "HistoQuestion: "+getQuestion()+" minval: "+getMinVal()+" maxVal: "+getMaxVal()+" stepSize: "+getStepSize();
     }
 }

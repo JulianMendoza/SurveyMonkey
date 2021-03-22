@@ -12,17 +12,15 @@ public class Survey {
     private Long id;
     @Transient
     private HashMap <Question, List<Answer>> survey;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<Answer> answers;
     private String title;
     private String surveyCode;
     private String surveyPassword;
-    public Survey(){
-        this("");
-    }
     public Survey(String title){
+        this(title,"");
+    }
+    public Survey(String title,String password){
         this.title=title;
-        answers = new ArrayList<>();
+        this.surveyPassword=password;
         survey = new HashMap<>();
     }
     public void setQuestion(Question q){
@@ -31,8 +29,9 @@ public class Survey {
     public void removeQuestion(){
     }
     public void setAnswer(Question q,Answer a){
-        answers.add(a);
-        survey.put(q,answers);
+        List<Answer> val=survey.get(q);
+        val.add(a);
+        survey.put(q,val);
     }
 
     public Long getId() {
@@ -42,21 +41,13 @@ public class Survey {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Transient
     public HashMap<Question, List<Answer>> getSurvey() {
         return survey;
     }
 
     public void setSurvey(HashMap<Question, List<Answer>> survey) {
         this.survey = survey;
-    }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
     }
 
     public String getTitle() {

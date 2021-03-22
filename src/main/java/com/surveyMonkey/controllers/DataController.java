@@ -35,6 +35,12 @@ public class DataController {
         q.addOption("Test Option label2");
         q.setOptions(options);
         s.setQuestion(q);
+        q=new OptionQuestion();
+        q.setQuestion("This is test question 1.1. It is an option question");
+        options=new ArrayList<>();
+        q.addOption("Test Option label1");
+        q.addOption("Test Option label2");
+        q.setOptions(options);
         HistoQuestion q2=new HistoQuestion();
         q2.setMaxVal(3);
         q2.setMinVal(1);
