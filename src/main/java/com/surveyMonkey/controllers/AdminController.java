@@ -38,6 +38,25 @@ public class AdminController {
 		return "questions";
 	}
 
+	@GetMapping("/survey/{surveyCode}")
+	public String showSurvey(@PathVariable String surveyCode, Model model){
+		Survey survey = new Survey();
+		for (Survey s : surveyRepository.findAll()) {
+			if(s.getSurveyCode().equals(surveyCode)){
+				survey = s;
+			}
+		}
+		model.addAttribute( survey);
+		return "show";
+	}
+
+	@GetMapping("/view")
+	public String test(){
+		return "success";
+
+
+	}
+
 	@PostMapping({ "/surveyResults" })
 	public String surveyResult() {
 		return "results";
@@ -45,7 +64,7 @@ public class AdminController {
 
 	@PostMapping({ "/create" })
 	@ResponseBody
-	public ResponseHelper createSurvey(@RequestBody SurveyHelper surveyHelper) {
+	public ResponseHelper createSurvey(@RequestBody SurveyHelper surveyHelper, Model model) {
 		Survey survey = new Survey(surveyHelper.getTitle(), surveyHelper.getPassword());
 		for (QuestionHelper q : surveyHelper.getQuestions()) {
 			switch (q.getQuestionType()) {
@@ -80,7 +99,9 @@ public class AdminController {
 			}
 		}
 
-		return new ResponseHelper(survey.getSurveyCode());
+		model.addAttribute("survey",survey);
+
+		return new ResponseHelper(survey.getSurveyCode(),survey.getTitle());
 	}
 
 	@GetMapping("/testQuestions")
