@@ -11,7 +11,7 @@ function appendDiv(val){
         let s="selection-div"+i;
         $("#question-section").append(
             "<div id="+q+">"+
-            "<label for=\"question\">Enter question:</label>" +
+            "<label for="+q1+">Enter question:</label>" +
             "<input type=\"text\" id="+q1+"><br>" +
             "<label for=\"type\">Select question type: </label>" +
             "<div id="+s+">"+
@@ -74,8 +74,114 @@ function appendDiv(val){
 //delete divs that are over the requested value
 function deleteDiv(val){
     for (let i = x; i >=val; i--) {
-        $("#question-section").find($("#question-div"+i)).remove();
+        $("#question-section").find("#question-div"+i).remove();
     }
+}
+function validate(){
+    if($("#password").val()===""){
+        alert("Please create a password!");
+    }
+    if($("#password").val()!==$("#password2").val()){
+        alert("Please make sure your passwords match!");
+    }
+    if($("#numQuestions").val()<0||$("#numQuestions").val()>15||$("#numQuestions").val()===""){
+        alert("Invalid amount of questions!")
+    }
+    console.log($("#question-div0").length);
+    if($("#question-div0").length===0){
+        alert("Please enter some questions!");
+    }
+    for(let i=0;i<x;i++){
+        let qDiv=$("#question-div"+i);
+        if(qDiv.find("#question"+i).val()===""){
+            alert("One of your questions is blank!");
+            return false;
+        }
+        switch($("select#type"+i).val()){
+            case "Histogram":
+                let histoQ=qDiv.find("#histogram");
+                if(histoQ.find("#min").val()===""||histoQ.find("#max").val()===""||histoQ.find("#step").val()===""){
+                    alert("One of your Histogram question fields is blank!");
+                    return false;
+                }
+            case "Option":
+                let optionQ=qDiv.find("#numOptions");
+                if(optionQ.val()===""){
+                    alert("One of your option questions has 0 options!");
+                    return false;
+                }else{
+                    let num=parseInt(optionQ.val());
+                    let options=qDiv.find("#options")
+                    for(let i=0;i<num;i++){
+                        console.log(options.find($("#option"+i)).val());
+                        if(options.find("#option"+i).val()===""){
+                            alert("One of your option fields is blank!");
+                            return false;
+                        }
+                    }
+                }
+        }
+        return true;
+    }
+}
+function createJson(){
+    console.log("CREATING JSON");
+    let survey= {
+        "title": "",
+        "password": "",
+        "questions": []
+    };
+    console.log($("#title").html());
+    survey["title"]=$("#title").html();
+    survey["password"]=$("#password").val();
+    for(let i=0;i<x;i++){
+        survey["questions"].push(questionTypeHelper(i));
+    }
+    console.log(JSON.stringify(survey));
+    let surveyData=JSON.stringify(survey)
+    $.ajax({
+        type:"POST",
+        url:"/create",
+        contentType: "application/json; charset=utf-8",
+        data:surveyData,
+        dataType:'json',
+        success:(e)=>{
+            alert("SUCCESSFULLY CREATED SURVEY! CODE: "+ e.code);
+         },
+        fail:(e)=>{
+            console.log(e);
+            alert("SOMETHING WENT WRONG!");
+        }
+    });
+}
+function questionTypeHelper(num){
+    let qDiv=$("#question-div"+num);
+    let question={
+        "question":"",
+        "questionType":"",
+        "minVal":"",
+        "maxVal":"",
+        "stepSize":"",
+        "choices":[]
+    }
+    question["question"]=qDiv.find("#question"+num).val();
+
+    switch($("select#type"+num).val()){
+        case "Histogram":
+            let histoQ=qDiv.find("#histogram");
+            question["minVal"]=parseInt(histoQ.find("#min").val());
+            question["maxVal"]=parseInt(histoQ.find("#max").val());
+            question["stepSize"]=parseInt(histoQ.find("#step").val());
+        case "Option":
+            let optionQ=qDiv.find("#numOptions");
+            let num=parseInt(optionQ.val());
+            let options=qDiv.find("#options")
+            for(let i=0;i<num;i++){
+                question["choices"].push(options.find($("#option"+i)).val());
+            }
+    }
+    question["questionType"]=$("select#type"+num).val();
+    return question;
 }
 //onload handler
 $(document).ready(()=> {
@@ -88,6 +194,11 @@ $(document).ready(()=> {
                 deleteDiv(num);
             }
             x = num;
+        }
+    });
+    $("#surveyCreate").click(()=>{
+        if(validate()){
+            createJson();
         }
     });
 });

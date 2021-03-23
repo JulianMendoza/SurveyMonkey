@@ -10,14 +10,19 @@
 </head>
 <body>
 <p>
-    Survey: <span th:text="${title}"></span>
+    Survey: <span id="title" th:text="${title}"></span>
 </p>
 <form onsubmit="return(false)">
-<label for="numQuestions">Enter the amount of questions</label><br>
-<input type="number" min="1" max="15" step="1" id="numQuestions"/>
+    <label for="password">Create a survey password!</label><br>
+    <input type="password" id="password"/><br>
+    <label for="password2">Re-enter the survey password!</label><br>
+    <input type="password" id="password2"/><br>
+    <label for="numQuestions">Enter the amount of questions:</label><br>
+    <input type="number" min="1" max="15" step="1" id="numQuestions"/>
     <button id="generateQuestions">Change questions</button>
 </form>
 <div id="question-section">
 </div>
+<button id="surveyCreate">Create your survey!</button>
 </body>
 </html>
