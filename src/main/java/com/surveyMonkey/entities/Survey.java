@@ -3,6 +3,7 @@ package com.surveyMonkey.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,12 +26,15 @@ public class Survey implements Serializable {
 	private String title;
 	private String surveyCode;
 	private String surveyPassword;
+	private final int SURVEY_CODE_LENGTH = 5;
 
 	public Survey() {
 	}
+
 	public Survey(String title, String password) {
-		this.title = title;
-		this.surveyPassword = password;
+		setTitle(title);
+		setSurveyPassword(password);
+		setSurveyCode(createSurveyCode());
 	}
 
 	public void setQuestion(Question q) {
@@ -75,5 +79,14 @@ public class Survey implements Serializable {
 
 	public void setSurveyPassword(String surveyPassword) {
 		this.surveyPassword = surveyPassword;
+	}
+
+	public String createSurveyCode() {
+		Random r = new Random();
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < SURVEY_CODE_LENGTH; i++) {
+			s.append((char) (r.nextInt(26) + 'a'));
+		}
+		return s.toString();
 	}
 }
