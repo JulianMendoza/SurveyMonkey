@@ -31,18 +31,4 @@ public class DataController {
        }
         return survey;
     }
-    @GetMapping("/testQuestions")
-    public List<QuestionAnswerWrapper> viewQuestions(@RequestParam("title") String title){
-        for(Survey s:surveyRepository.findAll()){
-            if(s.getTitle().equals(title)) {
-                System.out.println("Survey found");
-                System.out.println(s.getSurvey().size());
-                for(QuestionAnswerWrapper q:s.getSurvey()){
-                    System.out.println(q.getQuestion());
-                }
-              return s.getSurvey();
-            }
-        }
-        return null;
-    }
 }

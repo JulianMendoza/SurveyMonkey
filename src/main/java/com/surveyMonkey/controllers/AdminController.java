@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.surveyMonkey.util.Constants.*;
 
 
@@ -27,8 +29,6 @@ public class AdminController {
     }
     @GetMapping({"/surveyQuestions"})
     public String createQuestions(@RequestParam("title") String title ,Model model){
-        Survey s=new Survey(title);
-        surveyRepository.save(s);
         model.addAttribute("title",title);
         return "questions";
     }
@@ -62,6 +62,7 @@ public class AdminController {
                     break;
             }
         }
+        System.out.println("PASSWORD:"+surveyHelper.getPassword());
         if(survey.getTitle().equals("test")) {
             for(QuestionAnswerWrapper q:survey.getSurvey()){
                 System.out.println(q.getQuestion());
@@ -77,6 +78,14 @@ public class AdminController {
         }
 
         return new ResponseHelper("SURVEYCODEGOESHERE");
+    }
+    @GetMapping("/testQuestions")
+    @ResponseBody
+    public Survey viewQuestions(@RequestParam("title") String title){
+        for(Survey s:surveyRepository.findAll()){
+            return s;
+        }
+        return null;
     }
 
 }

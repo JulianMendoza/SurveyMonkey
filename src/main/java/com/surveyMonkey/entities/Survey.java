@@ -27,13 +27,7 @@ public class Survey implements Serializable {
 	private String surveyPassword;
 
 	public Survey() {
-		this("", "");
 	}
-
-	public Survey(String title) {
-		this(title, "");
-	}
-
 	public Survey(String title, String password) {
 		this.title = title;
 		this.surveyPassword = password;
