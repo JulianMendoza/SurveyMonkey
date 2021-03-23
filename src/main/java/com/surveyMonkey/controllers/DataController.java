@@ -32,13 +32,15 @@ public class DataController {
         return survey;
     }
     @GetMapping("/testQuestions")
-    public ArrayList<Question> viewQuestions(@RequestParam("title2") String title2){
+    public List<QuestionAnswerWrapper> viewQuestions(@RequestParam("title") String title){
         for(Survey s:surveyRepository.findAll()){
-            if(s.getTitle().equals(title2)) {
-                for(Question q:s.getQuestions()){
+            if(s.getTitle().equals(title)) {
+                System.out.println("Survey found");
+                System.out.println(s.getSurvey().size());
+                for(QuestionAnswerWrapper q:s.getSurvey()){
                     System.out.println(q.getQuestion());
                 }
-                return s.getQuestions();
+              return s.getSurvey();
             }
         }
         return null;

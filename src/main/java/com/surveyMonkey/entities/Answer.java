@@ -1,12 +1,13 @@
 package com.surveyMonkey.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Answer {
+public class Answer implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long answerId;
     private String answer;
     public String getAnswer() {
         return answer;

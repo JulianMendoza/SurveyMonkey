@@ -48,16 +48,34 @@ public class AdminController {
             switch(q.getQuestionType()){
                 case OPEN_ENDED:
                     survey.setQuestion(new OpenEndedQuestion(q.getQuestion()));
+                    System.out.println(q.getQuestion());
                     break;
                 case HISTOGRAM:
                     survey.setQuestion(new HistoQuestion(q.getQuestion(),q.getMinVal(),q.getMaxVal(),q.getStepSize()));
+                    System.out.println(q.getQuestion());
                     break;
                 case OPTION:
                     survey.setQuestion(new OptionQuestion(q.getQuestion(),q.getChoices()));
+                    for(String s:q.getChoices()){
+                        System.out.println(s);
+                    }
                     break;
             }
         }
+        if(survey.getTitle().equals("test")) {
+            for(QuestionAnswerWrapper q:survey.getSurvey()){
+                System.out.println(q.getQuestion());
+            }
+        }
         surveyRepository.save(survey);
+        for(Survey s:surveyRepository.findAll()){
+            if(s.getTitle().equals("test")) {
+                for(QuestionAnswerWrapper q:s.getSurvey()){
+                    System.out.println(q.getQuestion());
+                }
+            }
+        }
+
         return new ResponseHelper("SURVEYCODEGOESHERE");
     }
 

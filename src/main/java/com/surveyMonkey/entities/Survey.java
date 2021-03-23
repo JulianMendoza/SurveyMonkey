@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Survey {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Transient
-    private HashMap <Question, List<Answer>> survey;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<QuestionAnswerWrapper> survey=new ArrayList<>();
     private String title;
     private String surveyCode;
     private String surveyPassword;
     public Survey() {
         this("","");
-        survey = new HashMap<>();
     }
     public Survey(String title){
         this(title,"");
@@ -25,15 +25,9 @@ public class Survey {
     public Survey(String title,String password){
         this.title=title;
         this.surveyPassword=password;
-        survey = new HashMap<>();
     }
     public void setQuestion(Question q){
-        survey.put(q,new ArrayList<>());
-    }
-    public void setAnswer(Question q,Answer a){
-        List<Answer> val=survey.get(q);
-        val.add(a);
-        survey.put(q,val);
+        survey.add(new QuestionAnswerWrapper(q));
     }
 
     public Long getId() {
@@ -42,14 +36,6 @@ public class Survey {
 
     public void setId(Long id) {
         this.id = id;
-    }
-    @Transient
-    public HashMap<Question, List<Answer>> getSurvey() {
-        return survey;
-    }
-
-    public void setSurvey(HashMap<Question, List<Answer>> survey) {
-        this.survey = survey;
     }
 
     public String getTitle() {
@@ -63,6 +49,12 @@ public class Survey {
     public String getSurveyCode() {
         return surveyCode;
     }
+    public List<QuestionAnswerWrapper> getSurvey(){
+        return survey;
+    }
+    public void setSurvey(List<QuestionAnswerWrapper> survey){
+        this.survey=survey;
+    }
 
     public void setSurveyCode(String surveyCode) {
         this.surveyCode = surveyCode;
@@ -74,8 +66,5 @@ public class Survey {
 
     public void setSurveyPassword(String surveyPassword) {
         this.surveyPassword = surveyPassword;
-    }
-    public ArrayList<Question> getQuestions(){
-        return new ArrayList<>(survey.keySet());
     }
 }
