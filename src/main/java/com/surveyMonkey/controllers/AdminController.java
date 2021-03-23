@@ -1,27 +1,16 @@
 package com.surveyMonkey.controllers;
 
-import static com.surveyMonkey.util.Constants.HISTOGRAM;
-import static com.surveyMonkey.util.Constants.OPEN_ENDED;
-import static com.surveyMonkey.util.Constants.OPTION;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.surveyMonkey.entities.HistoQuestion;
-import com.surveyMonkey.entities.OpenEndedQuestion;
-import com.surveyMonkey.entities.OptionQuestion;
-import com.surveyMonkey.entities.QuestionAnswerWrapper;
-import com.surveyMonkey.entities.Survey;
+import com.surveyMonkey.entities.*;
 import com.surveyMonkey.repository.SurveyRepository;
 import com.surveyMonkey.util.QuestionHelper;
 import com.surveyMonkey.util.ResponseHelper;
 import com.surveyMonkey.util.SurveyHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import static com.surveyMonkey.util.Constants.*;
 
 @Controller
 public class AdminController {

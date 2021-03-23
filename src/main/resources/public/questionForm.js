@@ -87,6 +87,10 @@ function validate(){
     if($("#numQuestions").val()<0||$("#numQuestions").val()>15||$("#numQuestions").val()===""){
         alert("Invalid amount of questions!")
     }
+    console.log($("#question-div0").length);
+    if($("#question-div0").length===0){
+        alert("Please enter some questions!");
+    }
     for(let i=0;i<x;i++){
         let qDiv=$("#question-div"+i);
         if(qDiv.find("#question"+i).val()===""){
