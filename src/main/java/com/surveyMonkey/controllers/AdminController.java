@@ -50,12 +50,6 @@ public class AdminController {
 		return "show";
 	}
 
-	@GetMapping("/view")
-	public String test(){
-		return "success";
-
-
-	}
 
 	@PostMapping({ "/surveyResults" })
 	public String surveyResult() {
