@@ -113,4 +113,14 @@ public class AdminController {
 		return null;
 	}
 
+	//in the works this is not correct
+	@PostMapping({"/answersStored"})
+	@ResponseBody
+	public QuestionAnswerWrapper answerLinkedQuestion(Question q, Model model) {
+
+		return new QuestionAnswerWrapper(q);
+	}
+
+
+
 }
