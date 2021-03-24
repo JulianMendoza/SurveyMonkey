@@ -51,4 +51,11 @@ public class HistoQuestion extends Question {
 	public String toString() {
 		return "HistoQuestion: " + getQuestion() + " minval: " + getMinVal() + " maxVal: " + getMaxVal() + " stepSize: " + getStepSize();
 	}
+
+	public static void main(String[] args) {
+		HistoQuestion q = new HistoQuestion("dsadasda",4,5,2);
+		System.out.println(q.getClass().getSimpleName());
+	}
 }
+
+

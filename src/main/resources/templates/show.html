@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <title>Survey Monkey</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="jquery.min.js"></script>
+
+</head>
+<body>
+
+<div th:if="${survey.getSurveyCode() == null}" class="container mt-5 p-5">
+    <h1>Sorry, there is no survey with that link. </h1>
+    <br>
+    <h3 class="text-muted">Please reach out to the survey creator.</h3>
+</div>
+
+  <div th:unless="${survey.getSurveyCode() == null}" class="container mt-5 p-5">
+
+
+<div  class="row px-5">
+    <h1 class="my-3" th:text="${ survey.getTitle()}"></h1>
+</div>
+
+    <div class="row px-5 my-3">
+    <p class="" >Thank you for taking the time to complete the survey <u th:text="${ survey.getTitle()}"></u>. Please answer honestly, all surveys are anonymous and can not be traced back to you</p>
+</div>
+<hr>
+      <div class="row p-5">
+
+      <form style="width:100%">
+        <div th:each="instance : ${survey.survey}">
+
+              <div th:switch="${instance.question.getClass().getSimpleName()}">
+
+
+                <div th:case="'OpenEndedQuestion'" class="form-group mb-3">
+                  <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()} " class="form-label" ></label>
+                  <input th:id="${instance.question.getQuestion()}"  type="text" class="form-control"  placeholder="Type your answer" >
+                </div>
+
+                <div th:case="'OptionQuestion'" class="form-group mb-3">
+                  <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()}" class="form-label"></label>
+                  <select  class="form-control" th:id="${instance.question.getQuestion()}" >
+                      <option value="0" >Select answer</option>
+                      <option th:each="option : ${instance.question.getOptions()}" th:value="${option}" th:text="${option}"></option>
+                  </select>
+                </div>
+
+                <div th:case="'HistoQuestion'" class="form-group mb-3">
+
+                </div>
+
+              </div>
+        </div>
+
+          <div class="my-5">
+              <button type="submit" class="btn btn-primary">Submit answers</button>
+          </div>
+</form>
+
+
+</div>
+
+
+  </div>
+
+</body>
+</html>

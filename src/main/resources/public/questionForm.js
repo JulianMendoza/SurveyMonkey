@@ -146,7 +146,38 @@ function createJson(){
         data:surveyData,
         dataType:'json',
         success:(e)=>{
-            alert("SUCCESSFULLY CREATED SURVEY! CODE: "+ e.code);
+            $('body').html(
+                `
+                <div class="container text-center mt-5 pt-5">
+                <div class="card p-5">
+    <div class="row px-5">
+        <h1>${e.title} Survey Successfully Created !</h1>
+    </div>
+
+    <div class="row my-4 row px-5">
+        <h4> Here is your official survey link</h4>
+
+    </div>
+
+    <div class="row row px-5">
+        <p class="text-muted text-small">Share this with participants</p>
+    </div>
+
+    <div class="row my-4 row px-5">
+        <div class="input-group mb-3">
+            <input value="${window.location.hostname + '/survey/' + e.code}" type="text" id="copy"  style="border: solid 1px grey; border-radius: 3px" class="form-control-plaintext px-3" aria-label="Survey Link" aria-describedby="survey-link" readonly>
+            <button class="btn btn-primary" type="button" onclick="copy()" data-toggle="tooltip" data-placement="top" title="Copied !">Copy !</button>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+                `
+            );
+            console.log(e)
+
          },
         fail:(e)=>{
             console.log(e);
@@ -154,6 +185,31 @@ function createJson(){
         }
     });
 }
+
+
+/**
+Function used to copy the survey link to the clipboard
+ */
+function copy() {
+    /* Get the text field */
+    let copyText = document.getElementById("copy");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
+
+}
+
+
+
+
+
 function questionTypeHelper(num){
     let qDiv=$("#question-div"+num);
     let question={
