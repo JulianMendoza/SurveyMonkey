@@ -1,8 +1,31 @@
 # SurveyMonkey
 
+## Current State as per the Kanban
 
-#### Github Repository: https://github.com/oyenmwen/SurveyMonkey
+### Completed
+- Project Setup
+  - Github Repository: https://github.com/oyenmwen/SurveyMonkey
+  - Travis build: https://travis-ci.com/github/oyenmwen/SurveyMonkey
+  - Heroku Deploy: https://surveymonkey4806.herokuapp.com/
 
-#### Travis build: https://travis-ci.com/github/oyenmwen/SurveyMonkey
+- Created Initial Project Skeleton/ Packages
+- Updated the README
+- Created Tests
 
-#### Heroku Deploy: https://surveymonkey4806.herokuapp.com/
+### In progress
+- Further Controller implementation
+- Configure and use Chart.js for survey charts
+- Further Entities Configurations
+- Decide if a log in system is needed and if so design one or configure an existing one
+
+### Backlog
+- Weekly Scrum
+
+### Plan for the next Sprint
+- Create a presentable front end design.
+- Decide on the necessity of user authentication system
+- User should be able to create multiple questions on a survey
+
+### Database Schema as of Milestone 1
+
+![Database Schema](https://i.imgur.com/5IBL7oj.png)

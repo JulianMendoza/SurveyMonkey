@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "survey_user")
 public class User
 {
     @Id
@@ -11,9 +12,6 @@ public class User
     private Long id;
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Survey> surveys;
-    public User(){
-
-    }
 
     public Long getId() {
         return id;
