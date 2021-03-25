@@ -28,9 +28,6 @@ public class Survey implements Serializable {
 	private String surveyPassword;
 	private final int SURVEY_CODE_LENGTH = 5;
 
-	public Survey() {
-	}
-
 	public Survey(String title, String password) {
 		setTitle(title);
 		setSurveyPassword(password);

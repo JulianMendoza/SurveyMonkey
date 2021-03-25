@@ -11,9 +11,6 @@ public class User
     private Long id;
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Survey> surveys;
-    public User(){
-
-    }
 
     public Long getId() {
         return id;
