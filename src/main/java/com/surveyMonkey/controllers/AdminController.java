@@ -110,7 +110,7 @@ public class AdminController {
 	//in the works this is not correct
 //	@PostMapping({"/answersStored"})
 //	@ResponseBody
-//	public QuestionAnswerWrapper answerLinkedQuestion(Question q, Model model) {
+//	public QuestionAnswerWrapper answerLinkedQuestion(String q, Model model) {
 //		QuestionAnswerWrapper qw;
 //		for(sub: submissions){
 //			qw = QuestionAnswerWrapper.Repository.findById(sub.questionId);
