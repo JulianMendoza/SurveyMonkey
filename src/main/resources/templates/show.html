@@ -36,19 +36,20 @@
 
                 <div th:case="'OpenEndedQuestion'" class="form-group mb-3">
                   <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()} " class="form-label" ></label>
-                  <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}" type="text" class="form-control openEnded"  placeholder="Type your answer" >
+                  <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}" type="text" class="form-control openEnded"  placeholder="Type your answer" required>
                 </div>
 
                 <div th:case="'OptionQuestion'" class="form-group mb-3">
                   <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()}" class="form-label"></label>
-                  <select  class="form-control optionQuestion" th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}" >
-                      <option value="0" >Select answer</option>
+                  <select  class="form-control optionQuestion" th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}" required>
+                      <option value="" >Select answer</option>
                       <option th:each="option : ${instance.question.getOptions()}" th:value="${option}" th:text="${option}"></option>
                   </select>
                 </div>
 
-                <div th:case="'HistoQuestion'" class="form-group mb-3">
-
+                <div th:case="'HistoQuestion'" class="form-group mb-3 ">
+                    <label th:text="${instance.question.getQuestion() + ' (' + instance.question.getMinVal() + '-' + instance.question.getMaxVal() + ')'}" th:for="${instance.question.getQuestion()} " class="form-label" ></label>
+                    <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}" type="number" th:min="${instance.question.getMinVal()}"th:step="${instance.question.getStepSize()}" th:max="${instance.question.getMaxVal()}" class="form-control histoQuestion"  placeholder="Type your number" required>
                 </div>
 
               </div>
