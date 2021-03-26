@@ -1,5 +1,5 @@
 $(document).ready(()=> {
-    let surveyCode = {"data":$(".surveyCode").attr("id")}
+    let surveyCode = {"data":$(".surveyCode").attr("id")};
 	$.ajax({
         type:"POST",
         url:"/surveyResult",
@@ -7,6 +7,10 @@ $(document).ready(()=> {
         data:surveyCode,
         dataType:'json',
         success:(e)=>{
-            $('body').append('<div>' + e + '</div>'):
+            $('body').append('<div>' + e + '</div>');
 			
+    },fail:(e)=>{
+            alert("Something went wrong!");
+        }
+	});
 });
