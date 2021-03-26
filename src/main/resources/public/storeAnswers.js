@@ -6,7 +6,6 @@ $(document).ready(function () {
     })
 })
 
-
 function storingAnswers() {
     let submission = {
         "answeredStored": [],
@@ -25,7 +24,6 @@ function storingAnswers() {
                 });
             });
         }
-
         if (!$(".histoQuestion").length) {
             console.log("HistoQuestion class is empty")
         } else {
@@ -48,8 +46,6 @@ function storingAnswers() {
             });
         }
     }
-
-    console.log(JSON.stringify(submission));
     let submissionData = JSON.stringify(submission);
     $.ajax({
         type: "POST",

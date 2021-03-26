@@ -1,4 +1,5 @@
 package com.surveyMonkey;
+
 import com.surveyMonkey.entities.Survey;
 import com.surveyMonkey.repository.SurveyRepository;
 import org.junit.jupiter.api.Test;
@@ -16,13 +17,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AdminControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private SurveyRepository surveyRepository;
-
 
     @Test
     public void getNonExistantSurveyPageTest() throws Exception {
@@ -39,5 +37,4 @@ public class AdminControllerTest {
                 .andExpect(content().string(containsString(survey.getTitle())));
         surveyRepository.delete(survey);
     }
-
 }

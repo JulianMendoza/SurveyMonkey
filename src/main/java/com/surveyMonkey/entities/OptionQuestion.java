@@ -8,42 +8,39 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 @Entity
-public class
-OptionQuestion extends Question {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1795113345322280778L;
-	@ElementCollection
-	private List<String> options = new ArrayList<>();
+public class OptionQuestion extends Question {
 
-	public OptionQuestion() {
-	}
+    private static final long serialVersionUID = 1795113345322280778L;
+    @ElementCollection
+    private List<String> options = new ArrayList<>();
 
-	public OptionQuestion(String question, List<String> options) {
-		super(question);
-		setOptions(options);
-	}
+    public OptionQuestion() {
+    }
 
-	public OptionQuestion(List<String> lst) {
-		setOptions(lst);
-	}
+    public OptionQuestion(String question, List<String> options) {
+        super(question);
+        setOptions(options);
+    }
 
-	@ElementCollection
-	public List<String> getOptions() {
-		return options;
-	}
+    public OptionQuestion(List<String> lst) {
+        setOptions(lst);
+    }
 
-	public void setOptions(List<String> options) {
-		this.options = options;
-	}
+    @ElementCollection
+    public List<String> getOptions() {
+        return options;
+    }
 
-	public void addOption(String option) {
-		options.add(option);
-	}
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
 
-	@Override
-	public String toString() {
-		return "OptionQuestion: " + getQuestion() + " options: " + Arrays.asList(options);
-	}
+    public void addOption(String option) {
+        options.add(option);
+    }
+
+    @Override
+    public String toString() {
+        return "OptionQuestion: " + getQuestion() + " options: " + Arrays.asList(options);
+    }
 }

@@ -28,20 +28,15 @@
     </div>
     <hr>
     <div class="row p-5">
-
         <form onsubmit="return(false)" style="width:100%">
             <div class="numQuestions" th:id="${survey.getSurvey.size()}" th:each="instance : ${survey.survey}">
-
                 <div th:switch="${instance.question.getClass().getSimpleName()}">
-
-
                     <div th:case="'OpenEndedQuestion'" class="form-group mb-3">
                         <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()} "
                                class="form-label"></label>
                         <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}"
                                type="text" class="form-control openEnded" placeholder="Type your answer" required>
                     </div>
-
                     <div th:case="'OptionQuestion'" class="form-group mb-3">
                         <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()}"
                                class="form-label"></label>
@@ -52,7 +47,6 @@
                                     th:text="${option}"></option>
                         </select>
                     </div>
-
                     <div th:case="'HistoQuestion'" class="form-group mb-3 ">
                         <label th:text="${instance.question.getQuestion() + ' (' + instance.question.getMinVal() + '-' + instance.question.getMaxVal() + ')'}"
                                th:for="${instance.question.getQuestion()} " class="form-label"></label>
@@ -61,16 +55,13 @@
                                th:step="${instance.question.getStepSize()}" th:max="${instance.question.getMaxVal()}"
                                class="form-control histoQuestion" placeholder="Type your number" required>
                     </div>
-
                 </div>
             </div>
-
             <div class="my-5">
                 <button id="storeAnswersId" type="submit" class="btn btn-primary">Submit answers</button>
             </div>
         </form>
         <input class="surveyCodeClass" type="hidden" th:id="${ survey.getSurveyCode()}">
-
     </div>
 </div>
 </body>
