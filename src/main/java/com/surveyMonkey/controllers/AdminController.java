@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.surveyMonkey.entities.Answer;
 import com.surveyMonkey.entities.HistoQuestion;
 import com.surveyMonkey.entities.OpenEndedQuestion;
 import com.surveyMonkey.entities.OptionQuestion;
 import com.surveyMonkey.entities.QuestionAnswerWrapper;
 import com.surveyMonkey.entities.Survey;
 import com.surveyMonkey.repository.SurveyRepository;
+import com.surveyMonkey.util.AnswerHelper;
 import com.surveyMonkey.util.DataRetrieval;
 import com.surveyMonkey.util.QuestionHelper;
 import com.surveyMonkey.util.ResponseHelper;
@@ -130,6 +132,23 @@ public class AdminController {
 			return s;
 		}
 		return null;
+	}
+
+	@PostMapping({ "/answersStored" })
+	@ResponseBody
+	public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper, Model model) {
+
+		for (Survey s : surveyRepository.findAll()) {
+			if (s.getSurveyCode().equals(answerHelper.getSurveyCode())) {
+				for (int i = 0; i < answerHelper.getAnsweredStored().size(); i++) {
+					if (s.getSurvey().get(i).getqWrapperid() == answerHelper.getAnsweredStored().get(i).getQuestionId()) {
+						s.getSurvey().get(i).getAnswers().add(new Answer(answerHelper.getAnsweredStored().get(i).getAnswer()));
+						surveyRepository.save(s);
+						System.out.println(answerHelper.getAnsweredStored().get(i).getAnswer());
+					}
+				}
+			}
+		}
 	}
 
 }
