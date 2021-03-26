@@ -3,12 +3,14 @@
 ## Current State as per the Kanban
 
 ### Completed
+- Weekly Scrum - March 22nd 2021
 - Show survey page tests
 - Randomly Generated Survey Code
 - Survey Display Page
 - survey Confirmation Page
 - Updated the README
 - UML Diagrams
+- Weekly Scrum - March 15th 2021
 - Backend Architecture
 - Configure entities
 - Implement Controllers
@@ -18,7 +20,6 @@
 
 ### In progress
 - Add survey results page
-- Weekly Scrum - March 22nd 2021
 
 ### Backlog
 - Fix known bugs and results page layout
