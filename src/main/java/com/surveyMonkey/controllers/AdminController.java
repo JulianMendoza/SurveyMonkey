@@ -73,7 +73,7 @@ public class AdminController {
 		return "results";
 	}
 
-	@PostMapping({ "/surveyResults" })
+	@PostMapping({ "/surveyResult" })
 	public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval, Model model) {
 		for (Survey survey : surveyRepository.findAll()) {
 			if (survey.getSurveyCode().equals(dataRetrieval.getData())) {

@@ -2,7 +2,7 @@ $(document).ready(()=> {
     let surveyCode = {"data":$(".surveyCode").attr("id")}
 	$.ajax({
         type:"POST",
-        url:"/surveyResults",
+        url:"/surveyResult",
         contentType: "application/json; charset=utf-8",
         data:surveyCode,
         dataType:'json',
