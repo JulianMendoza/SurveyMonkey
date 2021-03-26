@@ -29,3 +29,6 @@
 ### Database Schema as of Milestone 1
 
 ![Database Schema](https://i.imgur.com/5IBL7oj.png)
+
+### Uml class Diagram for Milestone 2
+![surveymonkey_classdiagram2](https://user-images.githubusercontent.com/44556924/112630697-557ded80-8e0c-11eb-9c89-b156fb1f4ad7.png)
