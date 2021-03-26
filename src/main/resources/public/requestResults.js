@@ -7,5 +7,6 @@ $(document).ready(()=> {
         data:surveyCode,
         dataType:'json',
         success:(e)=>{
-            $('body').html(
+            $('body').append('<div>' + e + '</div>'):
+			
 });
