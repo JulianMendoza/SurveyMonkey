@@ -14,79 +14,77 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Survey implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7426934374543805936L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<QuestionAnswerWrapper> survey = new ArrayList<>();
-	private String title;
-	private String surveyCode;
-	private String surveyPassword;
-	private final int SURVEY_CODE_LENGTH = 5;
 
-	public Survey() {
-	}
+    private static final long serialVersionUID = -7426934374543805936L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<QuestionAnswerWrapper> survey = new ArrayList<>();
+    private String title;
+    private String surveyCode;
+    private String surveyPassword;
+    private final int SURVEY_CODE_LENGTH = 5;
 
-	public Survey(String title, String password) {
-		setTitle(title);
-		setSurveyPassword(password);
-		setSurveyCode(createSurveyCode());
-	}
+    public Survey() {
+    }
 
-	public void setQuestion(Question q) {
-		survey.add(new QuestionAnswerWrapper(q));
-	}
+    public Survey(String title, String password) {
+        setTitle(title);
+        setSurveyPassword(password);
+        setSurveyCode(createSurveyCode());
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setQuestion(Question q) {
+        survey.add(new QuestionAnswerWrapper(q));
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getSurveyCode() {
-		return surveyCode;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public List<QuestionAnswerWrapper> getSurvey() {
-		return survey;
-	}
+    public String getSurveyCode() {
+        return surveyCode;
+    }
 
-	public void setSurvey(List<QuestionAnswerWrapper> survey) {
-		this.survey = survey;
-	}
+    public List<QuestionAnswerWrapper> getSurvey() {
+        return survey;
+    }
 
-	public void setSurveyCode(String surveyCode) {
-		this.surveyCode = surveyCode;
-	}
+    public void setSurvey(List<QuestionAnswerWrapper> survey) {
+        this.survey = survey;
+    }
 
-	public String getSurveyPassword() {
-		return surveyPassword;
-	}
+    public void setSurveyCode(String surveyCode) {
+        this.surveyCode = surveyCode;
+    }
 
-	public void setSurveyPassword(String surveyPassword) {
-		this.surveyPassword = surveyPassword;
-	}
+    public String getSurveyPassword() {
+        return surveyPassword;
+    }
 
-	public String createSurveyCode() {
-		Random r = new Random();
-		StringBuilder s = new StringBuilder();
-		for (int i = 0; i < SURVEY_CODE_LENGTH; i++) {
-			s.append((char) (r.nextInt(26) + 'a'));
-		}
-		return s.toString();
-	}
+    public void setSurveyPassword(String surveyPassword) {
+        this.surveyPassword = surveyPassword;
+    }
+
+    public String createSurveyCode() {
+        Random r = new Random();
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < SURVEY_CODE_LENGTH; i++) {
+            s.append((char) (r.nextInt(26) + 'a'));
+        }
+        return s.toString();
+    }
 }
