@@ -8,7 +8,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 @Entity
-public class OptionQuestion extends Question {
+public class
+OptionQuestion extends Question {
 	/**
 	 * 
 	 */
