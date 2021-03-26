@@ -10,7 +10,7 @@
 - survey Confirmation Page
 - Updated the README
 - UML Diagrams
-- Weekly Scrum - March 15th 2021
+- Reformat Homepage
 - Backend Architecture
 - Configure entities
 - Implement Controllers
