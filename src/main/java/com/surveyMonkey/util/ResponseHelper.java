@@ -1,6 +1,9 @@
 package com.surveyMonkey.util;
 
 public class ResponseHelper {
+    private String code;
+    private String title;
+
     public ResponseHelper(String code, String title) {
         this.code = code;
         this.title = title;
@@ -17,7 +20,4 @@ public class ResponseHelper {
     public void setCode(String code) {
         this.code = code;
     }
-
-    private String code;
-    private String title;
 }

@@ -9,6 +9,7 @@ public class QuestionHelper {
     private int maxVal;
     private int stepSize;
     private List<String> choices;
+
     public String getQuestion() {
         return question;
     }
@@ -20,6 +21,7 @@ public class QuestionHelper {
     public String getQuestionType() {
         return questionType;
     }
+
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
     }
@@ -55,5 +57,4 @@ public class QuestionHelper {
     public void setChoices(List<String> choices) {
         this.choices = choices;
     }
-
 }

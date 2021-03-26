@@ -6,8 +6,10 @@ public class SurveyHelper {
     private String title;
     private String password;
     private List<QuestionHelper> questions;
+
     public SurveyHelper() {
     }
+
     public String getTitle() {
         return title;
     }
@@ -31,6 +33,5 @@ public class SurveyHelper {
     public void setQuestions(List<QuestionHelper> questions) {
         this.questions = questions;
     }
-
 
 }
