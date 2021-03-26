@@ -18,6 +18,10 @@ public class Answer implements Serializable {
 	private Long answerId;
 	private String answer;
 
+	public Answer(String s){
+		this.answer = s;
+	}
+
 	public String getAnswer() {
 		return answer;
 	}

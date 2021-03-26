@@ -5,10 +5,13 @@ import com.surveyMonkey.repository.SurveyRepository;
 import com.surveyMonkey.util.QuestionHelper;
 import com.surveyMonkey.util.ResponseHelper;
 import com.surveyMonkey.util.SurveyHelper;
+import com.surveyMonkey.util.StoreAnswerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.surveyMonkey.util.Constants.*;
 
@@ -108,15 +111,16 @@ public class AdminController {
 	}
 
 	//in the works this is not correct
-//	@PostMapping({"/answersStored"})
-//	@ResponseBody
-//	public QuestionAnswerWrapper answerLinkedQuestion(String q, Model model) {
-//		QuestionAnswerWrapper qw;
-//		for(sub: submissions){
-//			qw = QuestionAnswerWrapper.Repository.findById(sub.questionId);
-//		}
-//		return new QuestionAnswerWrapper(q);
-//	}
+	@PostMapping({"/answersStored"})
+	@ResponseBody
+	public QuestionAnswerWrapper answerLinkedQuestion(@RequestBody List<StoreAnswerHelper> storeAnswerHelper, Model model) {
+		QuestionAnswerWrapper q = new QuestionAnswerWrapper();
+
+		for(StoreAnswerHelper s: storeAnswerHelper){
+			q.getAnswers().add(new Answer(s.getAnswer()));
+		}
+		return q;
+	}
 
 
 

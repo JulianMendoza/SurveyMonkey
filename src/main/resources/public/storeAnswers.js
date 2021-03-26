@@ -1,7 +1,17 @@
+$(document).ready(function(){
+    $("#storeAnswersId").click(function(){
+    storingAnswers();
+    })
+})
+
+
+function storingAnswers(){
 let submission = {
-        "answeredStored":[]
+        "answeredStored":[],
+        "surveyCode":""
 };
 
+submission.surveyCode= $(".surveyCodeClass").attr("id");
 
 if(!$(".openEnded").length){
 }else{
@@ -9,7 +19,11 @@ if(!$(".openEnded").length){
     submission.answeredStored.push({
         "questionId" : e.data("id"),
         "answer" : e.val()
+
     });
+      console.log(e.data("id"));
+      console.log(e.val());
+
   });
 };
 
@@ -48,7 +62,13 @@ console.log(JSON.stringify(submission));
           contentType: "application/json; charset=utf-8",
           data:submissionData,
           dataType:'json',
-
+          success: (e) =>{
+          alert("Your Answers have been received!")
+          },
+          fail:(e)=>{
+                      console.log(e);
+                      alert("SOMETHING WENT WRONG!");
+                  }
       });
-
+}
 

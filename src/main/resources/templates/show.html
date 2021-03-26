@@ -28,9 +28,9 @@
             answer honestly, all surveys are anonymous and can not be traced back to you</p>
     </div>
     <hr>
-    <div class="row p-5">
+    < class="row p-5">
 
-        <form action="/answersStored" style="width:100%" method="post">
+        <form onsubmit="return(false)" style="width:100%" >
             <div th:each="instance : ${survey.survey}">
 
                 <div th:switch="${instance.question.getClass().getSimpleName()}">
@@ -62,10 +62,10 @@
             </div>
 
             <div class="my-5">
-                <button type="submit" class="btn btn-primary">Submit answers</button>
+                <button id="storeAnswersId" type="submit" class="btn btn-primary">Submit answers</button>
             </div>
         </form>
-
+        <input class="surveyCodeClass" type = "hidden" th:id = "${ survey.getSurveyCode()}">
 
     </div>
 
