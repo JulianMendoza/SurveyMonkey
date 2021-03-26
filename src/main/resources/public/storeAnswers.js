@@ -50,7 +50,6 @@ console.log("optionQuestion class is empty")
         "answer" :e.find(":selected").text()
     });
   });
-//console.log("data-id").find(":selected").text();
 };
 
 
