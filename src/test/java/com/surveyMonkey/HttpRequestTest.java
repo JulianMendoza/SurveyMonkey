@@ -23,5 +23,14 @@ public class HttpRequestTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Survey Monkey");
     }
-
+    @Test
+    public void testHomePage() throws Exception{
+            assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/home",
+                    String.class)).contains("Create a new survey");
+    }
+    @Test
+    public void testSurveyCreationPage() throws Exception{
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/surveyQuestions?title=test",
+                String.class)).contains("Create your survey!");
+    }
 }
