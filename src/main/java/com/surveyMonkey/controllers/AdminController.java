@@ -87,37 +87,17 @@ public class AdminController {
             switch (q.getQuestionType()) {
                 case OPEN_ENDED:
                     survey.setQuestion(new OpenEndedQuestion(q.getQuestion()));
-                    System.out.println(q.getQuestion());
                     break;
                 case HISTOGRAM:
                     survey.setQuestion(new HistoQuestion(q.getQuestion(), q.getMinVal(), q.getMaxVal(), q.getStepSize()));
-                    System.out.println(q.getQuestion());
                     break;
                 case OPTION:
                     survey.setQuestion(new OptionQuestion(q.getQuestion(), q.getChoices()));
-                    for (String s : q.getChoices()) {
-                        System.out.println(s);
-                    }
                     break;
             }
         }
-        System.out.println("PASSWORD:" + surveyHelper.getPassword());
-        if (survey.getTitle().equals("test")) {
-            for (QuestionAnswerWrapper q : survey.getSurvey()) {
-                System.out.println(q.getQuestion());
-            }
-        }
         surveyRepository.save(survey);
-        for (Survey s : surveyRepository.findAll()) {
-            if (s.getTitle().equals("test")) {
-                for (QuestionAnswerWrapper q : s.getSurvey()) {
-                    System.out.println(q.getQuestion());
-                }
-            }
-        }
-
         model.addAttribute("survey", survey);
-
         return new ResponseHelper(survey.getSurveyCode(), survey.getTitle());
     }
 
@@ -133,14 +113,12 @@ public class AdminController {
     @PostMapping({"/answersStored"})
     @ResponseBody
     public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper, Model model) {
-
         for (Survey s : surveyRepository.findAll()) {
             if (s.getSurveyCode().equals(answerHelper.getSurveyCode())) {
                 for (int i = 0; i < answerHelper.getAnsweredStored().size(); i++) {
                     if (s.getSurvey().get(i).getqWrapperid() == answerHelper.getAnsweredStored().get(i).getQuestionId()) {
                         s.getSurvey().get(i).getAnswers().add(new Answer(answerHelper.getAnsweredStored().get(i).getAnswer()));
                         surveyRepository.save(s);
-                        System.out.println(answerHelper.getAnsweredStored().get(i).getAnswer());
                     }
                 }
             }

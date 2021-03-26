@@ -82,16 +82,20 @@ function deleteDiv(val) {
 function validate() {
     if ($("#password").val() === "") {
         alert("Please create a password!");
+        return false;
     }
     if ($("#password").val() !== $("#password2").val()) {
         alert("Please make sure your passwords match!");
+        return false;
     }
     if ($("#numQuestions").val() < 0 || $("#numQuestions").val() > 15 || $("#numQuestions").val() === "") {
-        alert("Invalid amount of questions!")
+        alert("Invalid amount of questions!");
+        return false;
     }
     console.log($("#question-div0").length);
     if ($("#question-div0").length === 0) {
         alert("Please enter some questions!");
+        return false;
     }
     for (let i = 0; i < x; i++) {
         let qDiv = $("#question-div" + i);
