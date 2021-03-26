@@ -5,7 +5,9 @@ import com.surveyMonkey.entities.OpenEndedQuestion;
 import com.surveyMonkey.entities.QuestionAnswerWrapper;
 import com.surveyMonkey.entities.Survey;
 import com.surveyMonkey.repository.SurveyRepository;
+import com.surveyMonkey.util.AnswerHelper;
 import com.surveyMonkey.util.DataRetrieval;
+import com.surveyMonkey.util.StoreAnswerHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -102,5 +104,27 @@ public class AdminControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * get json with answers and question from survey
+     */
+    @Test
+    public void answerLinkedQuestionTest() throws Exception{
+    Survey survey = new Survey("test", "test");
+        List<QuestionAnswerWrapper> qa = new ArrayList<>();
+        qa.add(new QuestionAnswerWrapper(new OpenEndedQuestion("testing 12")));
+        survey.setSurvey(qa);
+        surveyRepository.save(survey);
+        StoreAnswerHelper sh = new StoreAnswerHelper();
+        sh.setAnswer("testing to store answer");
+        sh.setQuestionId(survey.getId());
+        AnswerHelper ah = new AnswerHelper();
+        ah.setSurveyCode(survey.getSurveyCode());
+        ah.getAnsweredStored().add(sh);
+        String str = asJsonString(ah);
+        this.mockMvc.perform(post("/answersStored").contentType(MediaType.APPLICATION_JSON).content(str))
+                .andExpect(content().string(containsString("")));
+
     }
 }
