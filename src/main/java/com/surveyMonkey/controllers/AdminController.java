@@ -50,11 +50,6 @@ public class AdminController {
 		return "questions";
 	}
 
-	@PostMapping("/survey")
-	public String listSurvey(@RequestParam("title") String title, Model model) {
-		return "questions";
-	}
-
 	@GetMapping("/survey/{surveyCode}")
 	public String showSurvey(@PathVariable String surveyCode, Model model) {
 		Survey survey = new Survey();
@@ -68,12 +63,13 @@ public class AdminController {
 	}
 
 	@PostMapping({ "/surveyResults" })
-	public String surveyResult(@RequestParam("surveyCode") String surveyCode, Model model) {
+	public String surveyResult(@RequestParam("surveyCode") String surveyCode,@RequestParam("surveyPassword") String surveyPassword, Model model) {
 		model.addAttribute("surveyCode", surveyCode);
 		return "results";
 	}
 
 	@PostMapping({ "/surveyResult" })
+	@ResponseBody
 	public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval, Model model) {
 		for (Survey survey : surveyRepository.findAll()) {
 			if (survey.getSurveyCode().equals(dataRetrieval.getData())) {

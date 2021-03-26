@@ -1,38 +1,32 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>Survey Monkey</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="jquery.min.js"></script>
-
 </head>
 <body>
 <div class="container text-center mt-5 pt-5">
     <div class="row">
         <h1>${e.title} Survey Successfully Created !</h1>
     </div>
-
     <div class="row my-4">
         <h4> Here is your official survey link</h4>
-
     </div>
-
     <div class="row">
         <p class="text-muted text-small">Share this with participants</p>
     </div>
 
     <div class="row my-4">
         <div class="input-group mb-3">
-            <input value="${e.code}" type="text" class="form-control-plaintext" aria-label="Survey Link" aria-describedby="survey-link" readonly>
+            <input value="${e.code}" type="text" class="form-control-plaintext" aria-label="Survey Link"
+                   aria-describedby="survey-link" readonly>
             <button class="btn btn-primary" type="button" id="copy">Copy !</button>
         </div>
 
     </div>
-
-
-
 </div>
-
 </body>
 </html>
