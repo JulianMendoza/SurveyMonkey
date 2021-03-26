@@ -2,13 +2,13 @@ package com.surveyMonkey.controllers;
 
 import com.surveyMonkey.entities.*;
 import com.surveyMonkey.repository.SurveyRepository;
-import com.surveyMonkey.util.QuestionHelper;
-import com.surveyMonkey.util.ResponseHelper;
-import com.surveyMonkey.util.SurveyHelper;
+import com.surveyMonkey.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.surveyMonkey.util.Constants.*;
 
@@ -106,5 +106,24 @@ public class AdminController {
 		}
 		return null;
 	}
+
+	@PostMapping({"/answersStored"})
+	@ResponseBody
+	public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper, Model model) {
+
+		for(Survey s: surveyRepository.findAll()){
+			if(s.getSurveyCode().equals(answerHelper.getSurveyCode())){
+				for(int i =0; i< answerHelper.getAnsweredStored().size();i++){
+					if(s.getSurvey().get(i).getqWrapperid() == answerHelper.getAnsweredStored().get(i).getQuestionId()){
+						s.getSurvey().get(i).getAnswers().add(new Answer(answerHelper.getAnsweredStored().get(i).getAnswer()));
+						surveyRepository.save(s);
+						System.out.println(answerHelper.getAnsweredStored().get(i).getAnswer());
+					}
+				}
+			}
+		}
+	}
+
+
 
 }
