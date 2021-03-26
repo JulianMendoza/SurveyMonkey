@@ -2,10 +2,7 @@ package com.surveyMonkey.controllers;
 
 import com.surveyMonkey.entities.*;
 import com.surveyMonkey.repository.SurveyRepository;
-import com.surveyMonkey.util.QuestionHelper;
-import com.surveyMonkey.util.ResponseHelper;
-import com.surveyMonkey.util.SurveyHelper;
-import com.surveyMonkey.util.StoreAnswerHelper;
+import com.surveyMonkey.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,16 +107,21 @@ public class AdminController {
 		return null;
 	}
 
-	//in the works this is not correct
 	@PostMapping({"/answersStored"})
 	@ResponseBody
-	public QuestionAnswerWrapper answerLinkedQuestion(@RequestBody List<StoreAnswerHelper> storeAnswerHelper, Model model) {
-		QuestionAnswerWrapper q = new QuestionAnswerWrapper();
+	public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper, Model model) {
 
-		for(StoreAnswerHelper s: storeAnswerHelper){
-			q.getAnswers().add(new Answer(s.getAnswer()));
+		for(Survey s: surveyRepository.findAll()){
+			if(s.getSurveyCode().equals(answerHelper.getSurveyCode())){
+				for(int i =0; i< answerHelper.getAnsweredStored().size();i++){
+					if(s.getSurvey().get(i).getqWrapperid() == answerHelper.getAnsweredStored().get(i).getQuestionId()){
+						s.getSurvey().get(i).getAnswers().add(new Answer(answerHelper.getAnsweredStored().get(i).getAnswer()));
+						surveyRepository.save(s);
+						System.out.println(answerHelper.getAnsweredStored().get(i).getAnswer());
+					}
+				}
+			}
 		}
-		return q;
 	}
 
 

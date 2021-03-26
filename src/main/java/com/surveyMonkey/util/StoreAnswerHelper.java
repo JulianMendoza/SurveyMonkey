@@ -3,14 +3,14 @@ package com.surveyMonkey.util;
 import java.util.List;
 
 public class StoreAnswerHelper {
-    private int questionId;
+    private long questionId;
     private String answer;
 
     public void setQuestionId(int questionId){
         this.questionId = questionId;
     }
 
-    public int getQuestionId(){
+    public long getQuestionId(){
         return questionId;
     }
 

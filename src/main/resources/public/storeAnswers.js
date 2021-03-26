@@ -1,6 +1,8 @@
 $(document).ready(function(){
     $("#storeAnswersId").click(function(){
     storingAnswers();
+    alert("Thank you for filling survey, we've received your answers!");
+
     })
 })
 
@@ -14,6 +16,7 @@ let submission = {
 submission.surveyCode= $(".surveyCodeClass").attr("id");
 
 if(!$(".openEnded").length){
+ console.log("openEnded class is empty")
 }else{
 [].concat($(".openEnded")).forEach((e) =>{
     submission.answeredStored.push({
@@ -27,19 +30,16 @@ if(!$(".openEnded").length){
   });
 };
 
-//classes for histogram and option answers have not been created yet
-
-//if($(".HistoQuestion").val() === ""){
-// console.log("HistoQuestion class is not empty")
-//}else{
-//console.log("HistoQuestion class is empty");
-//$(".HistoQuestion").forEach((e) =>{
-//     submission.answeredStored.append({
-//         "questionId" : e.data("id"),
-//         "answer" : e.val()
-//     });
-//   });
-//}
+if(!$(".histoQuestion").length){
+ console.log("HistoQuestion class is empty")
+}else{
+[].concat($(".histoQuestion")).forEach((e) =>{
+     submission.answeredStored.push({
+         "questionId" : e.data("id"),
+         "answer" : e.val()
+     });
+   });
+}
 
 if(!$(".optionQuestion").length){
 console.log("optionQuestion class is empty")
@@ -62,9 +62,9 @@ console.log(JSON.stringify(submission));
           contentType: "application/json; charset=utf-8",
           data:submissionData,
           dataType:'json',
-          success: (e) =>{
-          alert("Your Answers have been received!")
-          },
+          success: (e) => {
+                     alert("Thank you for filling survey, we've received your answers!");
+                     },
           fail:(e)=>{
                       console.log(e);
                       alert("SOMETHING WENT WRONG!");
