@@ -16,7 +16,6 @@ let submission = {
 submission.surveyCode= $(".surveyCodeClass").attr("id");
 
 if(!$(".openEnded").length){
- console.log("openEnded class is empty")
 }else{
 [].concat($(".openEnded")).forEach((e) =>{
     submission.answeredStored.push({
@@ -31,7 +30,6 @@ if(!$(".openEnded").length){
 };
 
 if(!$(".histoQuestion").length){
- console.log("HistoQuestion class is empty")
 }else{
 [].concat($(".histoQuestion")).forEach((e) =>{
      submission.answeredStored.push({
@@ -42,7 +40,6 @@ if(!$(".histoQuestion").length){
 }
 
 if(!$(".optionQuestion").length){
-console.log("optionQuestion class is empty")
 }else{
 [].concat($(".optionQuestion")).forEach((e) =>{
     submission.answeredStored.push({
@@ -50,7 +47,6 @@ console.log("optionQuestion class is empty")
         "answer" :e.find(":selected").text()
     });
   });
-//console.log("data-id").find(":selected").text();
 };
 
 
