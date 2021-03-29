@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class HttpRequestTest {
@@ -20,17 +21,17 @@ public class HttpRequestTest {
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-                String.class)).contains("Survey Monkey");
+        assertTrue(this.restTemplate.getForObject("http://localhost:" + port + "/",
+                String.class).contains("Survey Monkey"));
     }
     @Test
     public void testHomePage() throws Exception{
-            assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/home",
-                    String.class)).contains("Create a new survey");
+            assertTrue(this.restTemplate.getForObject("http://localhost:" + port + "/home",
+                    String.class).contains("Create a new survey"));
     }
     @Test
     public void testSurveyCreationPage() throws Exception{
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/surveyQuestions?title=test",
-                String.class)).contains("Create your survey!");
+        assertTrue(this.restTemplate.getForObject("http://localhost:" + port + "/surveyQuestions?title=test",
+                String.class).contains("Create your survey!"));
     }
 }
