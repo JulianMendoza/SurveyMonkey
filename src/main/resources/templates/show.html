@@ -35,12 +35,12 @@
                         <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()} "
                                class="form-label"></label>
                         <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}"
-                               type="text" class="form-control openEnded" placeholder="Type your answer" required>
+                               type="text" th:class="'form-control openEnded'+${instanceStat.index}" placeholder="Type your answer" required>
                     </div>
                     <div th:case="'OptionQuestion'" class="form-group mb-3">
                         <label th:text="${instance.question.getQuestion()}" th:for="${instance.question.getQuestion()}"
                                class="form-label"></label>
-                        <select class="form-control optionQuestion" th:id="${instance.question.getQuestion()}"
+                        <select th:class="'form-control optionQuestion'+${instanceStat.index}" th:id="${instance.question.getQuestion()}"
                                 th:data-id="${instance.getqWrapperid()}" required>
                             <option value="">Select answer</option>
                             <option th:each="option : ${instance.question.getOptions()}" th:value="${option}"
@@ -53,7 +53,7 @@
                         <input th:id="${instance.question.getQuestion()}" th:data-id="${instance.getqWrapperid()}"
                                type="number" th:min="${instance.question.getMinVal()}"
                                th:step="${instance.question.getStepSize()}" th:max="${instance.question.getMaxVal()}"
-                               class="form-control histoQuestion" placeholder="Type your number" required>
+                               th:class="'form-control histoQuestion'+${instanceStat.index}" placeholder="Type your number" required>
                     </div>
                 </div>
             </div>

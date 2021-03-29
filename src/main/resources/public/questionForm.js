@@ -92,7 +92,6 @@ function validate() {
         alert("Invalid amount of questions!");
         return false;
     }
-    console.log($("#question-div0").length);
     if ($("#question-div0").length === 0) {
         alert("Please enter some questions!");
         return false;
@@ -119,7 +118,6 @@ function validate() {
                     let num = parseInt(optionQ.val());
                     let options = qDiv.find("#options")
                     for (let i = 0; i < num; i++) {
-                        console.log(options.find($("#option" + i)).val());
                         if (options.find("#option" + i).val() === "") {
                             alert("One of your option fields is blank!");
                             return false;
@@ -132,19 +130,16 @@ function validate() {
 }
 
 function createJson() {
-    console.log("CREATING JSON");
     let survey = {
         "title": "",
         "password": "",
         "questions": []
     };
-    console.log($("#title").html());
     survey["title"] = $("#title").html();
     survey["password"] = $("#password").val();
     for (let i = 0; i < x; i++) {
         survey["questions"].push(questionTypeHelper(i));
     }
-    console.log(JSON.stringify(survey));
     let surveyData = JSON.stringify(survey)
     $.ajax({
         type: "POST",
