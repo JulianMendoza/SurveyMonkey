@@ -69,10 +69,12 @@ public class AdminControllerTest {
     public void surveyResultPageTest() throws Exception {
         Survey survey = new Survey("test", "test");
         System.out.println(survey.getSurveyCode());
+        surveyRepository.save(survey);
         String url = "/surveyResults?surveyCode=" + survey.getSurveyCode() + "&surveyPassword=test";
 
         this.mockMvc.perform(post(url)).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(survey.getSurveyCode())));
+        surveyRepository.delete(survey);
     }
 
     /**
