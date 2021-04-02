@@ -1,5 +1,4 @@
 $(document).ready(() => {
-    console.log($(".surveyCode").attr("id"));
     let surveyCode = {"data": $(".surveyCode").attr("id")};
     $.ajax({
         type: "POST",

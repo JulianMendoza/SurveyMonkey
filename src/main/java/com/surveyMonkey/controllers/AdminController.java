@@ -64,13 +64,18 @@ public class AdminController {
 
     @PostMapping({"/surveyResults"})
     public String surveyResult(@RequestParam("surveyCode") String surveyCode, @RequestParam("surveyPassword") String surveyPassword, Model model) {
-        model.addAttribute("surveyCode", surveyCode);
+        for(Survey survey:surveyRepository.findAll()){
+            if(survey.getSurveyCode().equals(surveyCode)&&survey.getSurveyPassword().equals(surveyPassword)){
+                model.addAttribute("surveyCode", surveyCode);
+                break;
+            }
+        }
         return "results";
     }
 
     @PostMapping({"/surveyResult"})
     @ResponseBody
-    public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval, Model model) {
+    public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval) {
         for (Survey survey : surveyRepository.findAll()) {
             if (survey.getSurveyCode().equals(dataRetrieval.getData())) {
                 return survey.getSurvey();
@@ -101,18 +106,9 @@ public class AdminController {
         return new ResponseHelper(survey.getSurveyCode(), survey.getTitle());
     }
 
-    @GetMapping("/testQuestions")
-    @ResponseBody
-    public Survey viewQuestions(@RequestParam("title") String title) {
-        for (Survey s : surveyRepository.findAll()) {
-            return s;
-        }
-        return null;
-    }
-
     @PostMapping({"/answersStored"})
     @ResponseBody
-    public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper, Model model) {
+    public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper) {
         for (Survey s : surveyRepository.findAll()) {
             if (s.getSurveyCode().equals(answerHelper.getSurveyCode())) {
                 for (int i = 0; i < answerHelper.getAnsweredStored().size(); i++) {
@@ -124,5 +120,4 @@ public class AdminController {
             }
         }
     }
-
 }

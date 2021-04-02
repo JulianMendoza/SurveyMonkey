@@ -20,13 +20,20 @@ public class Question implements Serializable {
     private Long questionId;
     private String question;
 
-    public Question() {
+    private String questionType;
 
+    public Question() {
     }
 
     public Question(String question) {
-        setQuestion(question);
+        this(question, "default");
     }
+
+    public Question(String question, String questionType) {
+        setQuestion(question);
+        setQuestionType(questionType);
+    }
+
 
     public String getQuestion() {
         return question;
@@ -57,6 +64,14 @@ public class Question implements Serializable {
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
 
 }

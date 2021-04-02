@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
+import static com.surveyMonkey.util.Constants.OPTION;
+
 @Entity
 public class OptionQuestion extends Question {
 
@@ -20,6 +22,7 @@ public class OptionQuestion extends Question {
     public OptionQuestion(String question, List<String> options) {
         super(question);
         setOptions(options);
+        setQuestionType(OPTION);
     }
 
     public OptionQuestion(List<String> lst) {
@@ -38,7 +41,6 @@ public class OptionQuestion extends Question {
     public void addOption(String option) {
         options.add(option);
     }
-
     @Override
     public String toString() {
         return "OptionQuestion: " + getQuestion() + " options: " + Arrays.asList(options);
