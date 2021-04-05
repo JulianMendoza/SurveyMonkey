@@ -25,10 +25,10 @@ public class FakeTestSurvey {
         a1.add(new Answer("Leaves"));
         a1.add(new Answer("Frog"));
         qaw1.setAnswers(a1);
-        QuestionAnswerWrapper qaw2=new QuestionAnswerWrapper(new HistoQuestion("How are you today? (1-100)",1,100,1));
+        QuestionAnswerWrapper qaw2=new QuestionAnswerWrapper(new HistoQuestion("How are you today? (1-25)",1,25,1));
         List<Answer> a2=new ArrayList<>();
         for(int i=0;i<900;i++){
-            a2.add(new Answer(Integer.toString(random.nextInt(100)+1)));
+            a2.add(new Answer(Integer.toString(random.nextInt(25)+1)));
         }
         qaw2.setAnswers(a2);
         List<String> options=Arrays.asList(new String[]{"Green","Blue","Red"});

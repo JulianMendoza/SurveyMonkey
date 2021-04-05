@@ -7,12 +7,18 @@ $(document).ready(() => {
         data: JSON.stringify(surveyCode),
         dataType: 'json',
         success: (e) => {
-            let questions=e;
-            for(let property in questions){
-                switch(questions[property].question.questionType){
-                    case "Open Ended":createOpenEndedView(questions[property].question,questions[property].answers); break;
-                    case "Histogram":createHistogramView(questions[property].question,questions[property].answers);break;
-                    case "Option":createOptionView(questions[property].question,questions[property].answers);break;
+            let questions = e;
+            for (let property in questions) {
+                switch (questions[property].question.questionType) {
+                    case "Open Ended":
+                        createOpenEndedView(questions[property].question, questions[property].answers);
+                        break;
+                    case "Histogram":
+                        createHistogramView(questions[property].question, questions[property].answers);
+                        break;
+                    case "Option":
+                        createOptionView(questions[property].question, questions[property].answers);
+                        break;
                 }
             }
         }, fail: (e) => {
@@ -20,55 +26,63 @@ $(document).ready(() => {
         }
     });
 });
-function createOpenEndedView(question,answers){
-    let table=document.createElement("table");
-    table.setAttribute("class","table table-bordered")
-    let tableTitle=document.createElement("tr");
-    tableTitle.setAttribute("colspan",2);
-    let title=document.createElement("h3");
-    let tr=document.createElement("tr");
-    tr.setAttribute("scope","col");
-    tr.innerHTML="Answers";
-    title.append("Question:"+question.question);
+
+function createOpenEndedView(question, answers) {
+    let table = document.createElement("table");
+    table.setAttribute("class", "table table-bordered");
+    let tableTitle = document.createElement("th");
+    tableTitle.setAttribute("colspan", 2);
+    let title = document.createElement("h3");
+    title.append(question.question);
     tableTitle.append(title);
-    table.append(tableTitle);
-    table.append(tr);
-    for(let answer in answers){
-        let row=document.createElement("tr");
-        row.setAttribute("scope","row");
-        row.innerHTML=answers[answer].answer;
-        $(table).append(row);
+    let head=document.createElement("thead");
+    head.setAttribute("class","thead-dark")
+    let row =document.createElement("tr");
+    row.append(tableTitle);
+    head.append(row);
+    table.append(head);
+    let tbody=document.createElement("tbody");
+    for (let answer in answers) {
+        let tr=document.createElement("tr");
+        let td=document.createElement("td");
+        td.innerHTML=answers[answer].answer;
+        tr.append(td);
+        tbody.append(tr);
     }
-    $('body').append(table);
+    table.append(tbody);
+    $('.wrapper').append(table);
 }
-function createHistogramView(question,answers){
-    let div=document.createElement("div");
-    let canvas=document.createElement("canvas");
-    canvas.setAttribute("id","histo"+question.questionId);
-    $('body').append(canvas);
-    let labels=[];
-    for(let i=1;i<=question.maxVal;i+=question.stepSize){
+
+function createHistogramView(question, answers) {
+    let div = document.createElement("div");
+    div.setAttribute("class", "chart")
+    let canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "histo" + question.questionId);
+    div.append(canvas);
+    $('.wrapper').append(div);
+    let labels = [];
+    for (let i = 1; i <= question.maxVal; i += question.stepSize) {
         labels.push(i);
     }
-    let data=new Array(labels.length).fill(0);
-    for(let i=0;i<answers.length;i++){
-        data[Math.floor((parseInt(answers[i].answer)/question.stepSize)-1)]++;
+    let data = new Array(labels.length).fill(0);
+    for (let i = 0; i < answers.length; i++) {
+        data[Math.floor((parseInt(answers[i].answer) / question.stepSize) - 1)]++;
     }
-    console.log(data);
-    console.log(labels);
-    var ctx=document.getElementById("histo"+question.questionId).getContext("2d");
-    var chart=new Chart(ctx,{
-        type:"bar",
-        options:{
-            layout:{
-                padding:10,
+    var ctx = document.getElementById("histo" + question.questionId).getContext("2d");
+    var chart = new Chart(ctx, {
+        type: "bar",
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: 10,
             },
-            legend:{
-                position:"bottom",
+            legend: {
+                position: "bottom",
             },
-            title:{
-                display:true,
-                text:question.question,
+            title: {
+                display: true,
+                text: question.question,
             },
             scales: {
                 yAxes: [{
@@ -79,18 +93,72 @@ function createHistogramView(question,answers){
                 }],
             }
         },
-        data:{
-            labels:labels,
-            datasets:[{
-                label:'Value user entered',
-                data:data,
-                backgroundColor:"rgba(75, 192, 192, 0.2)",
-                borderColor:"rgb(75, 192, 192)",
-                borderWidth:1
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of people',
+                data: data,
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgb(75, 192, 192)",
+                borderWidth: 1
             }],
         },
     });
 }
-function createOptionView(e){
+
+function createOptionView(question, answers) {
+    let div = document.createElement("div");
+    div.setAttribute("class", "chart");
+    let canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "option" + question.questionId);
+    div.append(canvas);
+    $('.wrapper').append(div);
+    let labels = [];
+    console.log(question);
+    console.log(answers);
+    for (option in question.options) {
+        labels.push(question.options[option]);
+    }
+    let data = new Array(labels.length).fill(0);
+    for (let i = 0; i < answers.length; i++) {
+        for (option in question.options) {
+            if (answers[i].answer == question.options[option]) {
+                data[option]++;
+            }
+        }
+    }
+    let colors = [];
+    for (option in question.options) {
+        r = Math.floor(Math.random() * 200);
+        g = Math.floor(Math.random() * 200);
+        b = Math.floor(Math.random() * 200);
+        colors.push('rgb(' + r + ', ' + g + ', ' + b + ')');
+    }
+    var ctx = document.getElementById("option" + question.questionId).getContext("2d");
+    var chart = new Chart(ctx, {
+        type: "pie",
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: 10,
+            },
+            legend: {
+                position: "bottom",
+            },
+            title: {
+                display: true,
+                text: question.question,
+            },
+        },
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: colors
+            }],
+        },
+    });
+
 
 }
