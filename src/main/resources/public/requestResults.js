@@ -41,8 +41,55 @@ function createOpenEndedView(question,answers){
     }
     $('body').append(table);
 }
-function createHistogramView(e){
-
+function createHistogramView(question,answers){
+    let div=document.createElement("div");
+    let canvas=document.createElement("canvas");
+    canvas.setAttribute("id","histo"+question.questionId);
+    $('body').append(canvas);
+    let labels=[];
+    for(let i=1;i<=question.maxVal;i+=question.stepSize){
+        labels.push(i);
+    }
+    let data=new Array(labels.length).fill(0);
+    for(let i=0;i<answers.length;i++){
+        data[Math.floor((parseInt(answers[i].answer)/question.stepSize)-1)]++;
+    }
+    console.log(data);
+    console.log(labels);
+    var ctx=document.getElementById("histo"+question.questionId).getContext("2d");
+    var chart=new Chart(ctx,{
+        type:"bar",
+        options:{
+            layout:{
+                padding:10,
+            },
+            legend:{
+                position:"bottom",
+            },
+            title:{
+                display:true,
+                text:question.question,
+            },
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Number of people",
+                    }
+                }],
+            }
+        },
+        data:{
+            labels:labels,
+            datasets:[{
+                label:'Value user entered',
+                data:data,
+                backgroundColor:"rgba(75, 192, 192, 0.2)",
+                borderColor:"rgb(75, 192, 192)",
+                borderWidth:1
+            }],
+        },
+    });
 }
 function createOptionView(e){
 
