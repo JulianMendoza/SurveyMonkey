@@ -11,6 +11,7 @@ public class FakeTestSurvey {
     private Survey testSurvey;
     private Random random;
     public FakeTestSurvey(){
+        random=new Random();
         populate();
     }
     private void populate(){
@@ -42,5 +43,9 @@ public class FakeTestSurvey {
         qa.add(qaw2);
         qa.add(qaw3);
         testSurvey.setSurvey(qa);
+        testSurvey.setSurveyCode("reserved");
+    }
+    public Survey getTestSurvey(){
+        return this.testSurvey;
     }
 }

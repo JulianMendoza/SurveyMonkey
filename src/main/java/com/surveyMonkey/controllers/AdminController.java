@@ -6,6 +6,7 @@ import static com.surveyMonkey.util.Constants.OPTION;
 
 import java.util.List;
 
+import com.surveyMonkey.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,6 @@ import com.surveyMonkey.entities.OptionQuestion;
 import com.surveyMonkey.entities.QuestionAnswerWrapper;
 import com.surveyMonkey.entities.Survey;
 import com.surveyMonkey.repository.SurveyRepository;
-import com.surveyMonkey.util.AnswerHelper;
-import com.surveyMonkey.util.DataRetrieval;
-import com.surveyMonkey.util.QuestionHelper;
-import com.surveyMonkey.util.ResponseHelper;
-import com.surveyMonkey.util.SurveyHelper;
 
 @Controller
 public class AdminController {
@@ -36,6 +32,8 @@ public class AdminController {
 
     @GetMapping({"/"})
     public String home(Model model) {
+        FakeTestSurvey survey = new FakeTestSurvey();
+        surveyRepository.save(survey.getTestSurvey());
         return "index";
     }
 
