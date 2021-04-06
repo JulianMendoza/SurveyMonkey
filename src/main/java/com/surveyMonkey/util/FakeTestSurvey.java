@@ -42,6 +42,30 @@ public class FakeTestSurvey {
         qa.add(qaw1);
         qa.add(qaw2);
         qa.add(qaw3);
+        QuestionAnswerWrapper qaw4=new QuestionAnswerWrapper(new HistoQuestion("How are cool are you today? (1-25)",1,25,1));
+        List<Answer> a4=new ArrayList<>();
+        for(int i=0;i<900;i++){
+            a4.add(new Answer(Integer.toString(random.nextInt(25)+1)));
+        }
+        qaw4.setAnswers(a4);
+        qa.add(qaw4);
+        QuestionAnswerWrapper qaw5=new QuestionAnswerWrapper(new OpenEndedQuestion("What is not green?"));
+        List<Answer> a5=new ArrayList<>();
+        a5.add(new Answer("not Pickles"));
+        a5.add(new Answer("not Grass"));
+        a5.add(new Answer("not an Unripe bananas"));
+        a5.add(new Answer("not Moss"));
+        a5.add(new Answer("not Leaves"));
+        a5.add(new Answer("not a Frog"));
+        qaw5.setAnswers(a5);
+        qa.add(qaw5);
+        a1=new ArrayList<>();
+        QuestionAnswerWrapper qaw6=new QuestionAnswerWrapper(new OptionQuestion("What color is not the best?",new ArrayList<>(options)));
+        for(int i=0;i<900;i++){
+            a1.add(new Answer(options.get(random.nextInt(3))));
+        }
+        qaw6.setAnswers(a1);
+        qa.add(qaw6);
         testSurvey.setSurvey(qa);
         testSurvey.setSurveyCode("reserved");
     }

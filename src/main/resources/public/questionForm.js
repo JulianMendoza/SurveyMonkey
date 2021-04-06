@@ -108,6 +108,9 @@ function validate() {
                 if (histoQ.find("#min").val() === "" || histoQ.find("#max").val() === "" || histoQ.find("#step").val() === "") {
                     alert("One of your Histogram question fields is blank!");
                     return false;
+                }else if(histoQ.find("#min").val()>histoQ.find("#max").val()||histoQ.find("#max").val()<histoQ.find("#step").val()){
+                    alert("You cannot have min val greater than max or step size greater than max!");
+                    return false;
                 }
             case "Option":
                 let optionQ = qDiv.find("#numOptions");
