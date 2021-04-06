@@ -6,6 +6,7 @@ import com.surveyMonkey.entities.QuestionAnswerWrapper;
 import com.surveyMonkey.entities.Survey;
 import com.surveyMonkey.repository.SurveyRepository;
 import com.surveyMonkey.util.DataRetrieval;
+import com.surveyMonkey.util.FakeTestSurvey;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,9 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -93,6 +96,23 @@ public class AdminControllerTest {
         this.mockMvc.perform(post("/surveyResult").contentType(MediaType.APPLICATION_JSON).content(str))
                 .andExpect(content().string(containsString("What is life?")));
         surveyRepository.delete(survey);
+    }
+    @Test
+    public void deleteSurveyTest() throws Exception {
+        FakeTestSurvey s=new FakeTestSurvey();
+        surveyRepository.save(s.getTestSurvey());
+        List<Survey> surveys= new ArrayList<>();
+        for(Survey s1:surveyRepository.findAll()){
+            surveys.add(s1);
+        }
+        assertTrue(surveys.size()==1);
+        this.mockMvc.perform(post("/deleteSurvey?surveyCode=reserved&surveyPassword=reserved")).andExpect(content().string(containsString("Successfully deleted your survey!")));
+        surveys= new ArrayList<>();
+        for(Survey s1:surveyRepository.findAll()){
+            surveys.add(s1);
+        }
+        assertTrue(surveys.size()==0);
+
     }
 
     /**

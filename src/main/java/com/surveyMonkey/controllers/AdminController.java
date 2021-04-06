@@ -118,4 +118,21 @@ public class AdminController {
             }
         }
     }
+    @PostMapping({"/deleteSurvey"})
+    public String deleteSurvey(@RequestParam("surveyCode") String surveyCode, @RequestParam("surveyPassword") String surveyPassword,Model model){
+        boolean foundSurvey=false;
+        for(Survey survey:surveyRepository.findAll()) {
+            if (survey.getSurveyCode().equals(surveyCode) && survey.getSurveyPassword().equals(surveyPassword)) {
+                surveyRepository.delete(survey);
+                foundSurvey=true;
+                break;
+            }
+        }
+        if(foundSurvey){
+            model.addAttribute("outcome","success");
+        }else{
+            model.addAttribute("outcome","failure");
+        }
+        return "deleteSurvey";
+    }
 }
