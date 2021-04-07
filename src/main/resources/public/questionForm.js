@@ -92,7 +92,6 @@ function validate() {
         alert("Invalid amount of questions!");
         return false;
     }
-    console.log($("#question-div0").length);
     if ($("#question-div0").length === 0) {
         alert("Please enter some questions!");
         return false;
@@ -109,6 +108,9 @@ function validate() {
                 if (histoQ.find("#min").val() === "" || histoQ.find("#max").val() === "" || histoQ.find("#step").val() === "") {
                     alert("One of your Histogram question fields is blank!");
                     return false;
+                }else if(histoQ.find("#min").val()>histoQ.find("#max").val()||histoQ.find("#max").val()<histoQ.find("#step").val()){
+                    alert("You cannot have min val greater than max or step size greater than max!");
+                    return false;
                 }
             case "Option":
                 let optionQ = qDiv.find("#numOptions");
@@ -119,7 +121,6 @@ function validate() {
                     let num = parseInt(optionQ.val());
                     let options = qDiv.find("#options")
                     for (let i = 0; i < num; i++) {
-                        console.log(options.find($("#option" + i)).val());
                         if (options.find("#option" + i).val() === "") {
                             alert("One of your option fields is blank!");
                             return false;
@@ -132,19 +133,16 @@ function validate() {
 }
 
 function createJson() {
-    console.log("CREATING JSON");
     let survey = {
         "title": "",
         "password": "",
         "questions": []
     };
-    console.log($("#title").html());
     survey["title"] = $("#title").html();
     survey["password"] = $("#password").val();
     for (let i = 0; i < x; i++) {
         survey["questions"].push(questionTypeHelper(i));
     }
-    console.log(JSON.stringify(survey));
     let surveyData = JSON.stringify(survey)
     $.ajax({
         type: "POST",
