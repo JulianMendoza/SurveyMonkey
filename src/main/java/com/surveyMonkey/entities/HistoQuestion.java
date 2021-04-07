@@ -2,6 +2,8 @@ package com.surveyMonkey.entities;
 
 import javax.persistence.Entity;
 
+import static com.surveyMonkey.util.Constants.HISTOGRAM;
+
 @Entity
 public class HistoQuestion extends Question {
 
@@ -13,7 +15,7 @@ public class HistoQuestion extends Question {
 
 	}
     public HistoQuestion(String question, int minVal, int maxVal, int stepSize) {
-        super(question);
+        super(question,HISTOGRAM);
         setMinVal(minVal);
         setMaxVal(maxVal);
         setStepSize(stepSize);

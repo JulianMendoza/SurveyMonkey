@@ -1,7 +1,5 @@
 package com.surveyMonkey.util;
 
-import java.util.List;
-
 public class StoreAnswerHelper {
     private long questionId;
     private String answer;
