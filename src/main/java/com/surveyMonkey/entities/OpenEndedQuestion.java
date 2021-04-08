@@ -1,10 +1,12 @@
 package com.surveyMonkey.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 
 import static com.surveyMonkey.util.Constants.OPEN_ENDED;
 
-@Entity
+@Document
 public class OpenEndedQuestion extends Question {
 
     private static final long serialVersionUID = 355356807141869645L;

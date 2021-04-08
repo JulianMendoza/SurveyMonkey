@@ -1,10 +1,12 @@
 package com.surveyMonkey.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Entity;
 
 import static com.surveyMonkey.util.Constants.HISTOGRAM;
 
-@Entity
+@Document
 public class HistoQuestion extends Question {
 
     private static final long serialVersionUID = 5551750221995506502L;
