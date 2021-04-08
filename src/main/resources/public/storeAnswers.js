@@ -2,7 +2,8 @@ $(document).ready(function () {
     $("#storeAnswersId").click(function () {
         if (validate()) {
             storingAnswers();
-            alert("Thank you for filling survey, we've received your answers!");
+            window.open("http://localhost:8080/submissionPage");
+
         } else {
             alert("Please make sure you fill the fields!");
         }
