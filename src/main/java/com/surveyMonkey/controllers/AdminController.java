@@ -155,21 +155,5 @@ public class AdminController {
         }
         return "deleteSurvey";
     }
-    @PostMapping({"/deleteSurveyWithoutPswrd"})
-    public String deleteSurveyWoPswrd(@RequestParam("surveyCode") String surveyCode, Model model){
-        boolean foundSurvey=false;
-        for(Survey survey:surveyRepository.findAll()) {
-            if (survey.getSurveyCode().equals(surveyCode)) {
-                surveyRepository.delete(survey);
-                foundSurvey=true;
-                break;
-            }
-        }
-        if(foundSurvey){
-            model.addAttribute("outcome","success");
-        }else{
-            model.addAttribute("outcome","failure");
-        }
-        return "deleteSurvey";
-    }
+    
 }
