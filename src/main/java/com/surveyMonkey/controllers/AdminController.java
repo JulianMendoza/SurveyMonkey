@@ -42,6 +42,9 @@ public class AdminController {
         return "creation";
     }
 
+    @GetMapping({"/submissionPage"})
+    public String createSubmission(){return "submission";}
+
     @GetMapping({"/surveyQuestions"})
     public String createQuestions(@RequestParam("title") String title, Model model) {
         model.addAttribute("title", title);

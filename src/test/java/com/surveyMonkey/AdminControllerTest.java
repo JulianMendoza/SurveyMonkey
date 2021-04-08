@@ -114,6 +114,11 @@ public class AdminControllerTest {
         assertTrue(surveys.size()==0);
 
     }
+    @Test
+    public void endPoint() throws Exception {
+        this.mockMvc.perform(get("/submissionPage")).andExpect(content().string(containsString("You have successfully submitted your survey")));
+
+    }
 
     /**
      * https://stackoverflow.com/questions/20504399/testing-springs-requestbody-using-spring-mockmvc
