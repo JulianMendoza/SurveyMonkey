@@ -80,6 +80,7 @@ public class AdminControllerTest {
         surveyRepository.delete(survey);
     }
 
+
     /**
      * Test /surveyResult endpoint with a survey
      */
@@ -125,4 +126,38 @@ public class AdminControllerTest {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Test /surveyResultsWoPswrd endpoint with a valid survey code which requires no password
+     */
+    @Test
+    public void surveyResultsWoPswrdPageTest() throws Exception {
+        Survey survey = new Survey("test", "test");
+        System.out.println(survey.getSurveyCode());
+        surveyRepository.save(survey);
+        String url = "/surveyResultsWoPswrd?surveyCodes="+ survey.getSurveyCode() ;
+
+        this.mockMvc.perform(post(url)).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString(survey.getSurveyCode())));
+        surveyRepository.delete(survey);
+    }
+
+    /**
+     * Test /surveyResultsWithoutPassword endpoint with a survey
+     */
+    @Test
+    public void surveyResultsWithoutPasswordTest() throws Exception {
+        Survey survey = new Survey("test", "test");
+        List<QuestionAnswerWrapper> qa = new ArrayList<>();
+        qa.add(new QuestionAnswerWrapper(new OpenEndedQuestion("This is a question?")));
+        survey.setSurvey(qa);
+        surveyRepository.save(survey);
+        DataRetrieval dr=new DataRetrieval();
+        dr.setData(survey.getSurveyCode());
+        String str = asJsonString(dr);
+        this.mockMvc.perform(post("/surveyResultsWithoutPassword").contentType(MediaType.APPLICATION_JSON).content(str))
+                .andExpect(content().string(containsString("This is a question?")));
+        surveyRepository.delete(survey);
+    }
+
 }

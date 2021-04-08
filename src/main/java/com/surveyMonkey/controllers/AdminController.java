@@ -71,11 +71,31 @@ public class AdminController {
         return "results";
     }
 
+    @PostMapping({"/surveyResultsWoPswrd"})
+    public String surveyResultWoPswrd(@RequestParam("surveyCodes") String surveyCode, Model model) {
+        for(Survey survey:surveyRepository.findAll()){
+            if(survey.getSurveyCode().equals(surveyCode)){
+                model.addAttribute("surveyCodes", surveyCode);
+                break;
+            }
+        }
+        return "resultswithnoPswrd";
+    }
     @PostMapping({"/surveyResult"})
     @ResponseBody
     public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval) {
         for (Survey survey : surveyRepository.findAll()) {
             if (survey.getSurveyCode().equals(dataRetrieval.getData())) {
+                return survey.getSurvey();
+            }
+        }
+        return null;
+    }
+    @PostMapping({"/surveyResultsWithoutPassword"})
+    @ResponseBody
+    public List<QuestionAnswerWrapper> surveyResultWoPswrd(@RequestBody DataRetrieval dataRetrieval){
+        for (Survey survey: surveyRepository.findAll()){
+            if(survey.getSurveyCode().equals(dataRetrieval.getData())){
                 return survey.getSurvey();
             }
         }
@@ -135,4 +155,5 @@ public class AdminController {
         }
         return "deleteSurvey";
     }
+    
 }

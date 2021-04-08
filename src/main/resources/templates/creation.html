@@ -41,6 +41,44 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col col-6" id="resultAvailable" style="display:none;">
+            <div class="card p-5">
+                <h5 class="card-title">Survey Results Without Password</h5>
+                <form action="/surveyResultsWoPswrd" method="post">
+                    <div class="my-3">
+                        <label for="title" class="form-label">Click button below to view result without password</label>
+                        <input type="text" class="form-control" id="surveyCodes" name="surveyCodes" required="true">
+
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">View Results without Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="optionResult"  class="col">
+                <div class="card w-50">
+                    <div class="card-body">
+                        <h5 class="card-title">Would You like to display result to the public?</h5>
+                        <button type="submit" id="yesResult" class="btn btn-primary">Yes</button> <button id="noResult" type="submit" class="btn btn-primary">No</button>
+                    </div>
+                </div>
+        </div>
+
+
+    </div>
 </div>
+<script type="text/javascript">
+  document.getElementById("yesResult").onclick = function() {
+     document.getElementById("optionResult").style.display = "none";
+     document.getElementById("resultAvailable").style.display = "block";
+
+
+        }
+  document.getElementById("noResult").onclick = function() {
+     document.getElementById("resultAvailable").style.display = "none";
+        }
+</script>
 </body>
 </html>

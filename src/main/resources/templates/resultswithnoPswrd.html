@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Survey Monkey</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="requestResultsWcode.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<input type="hidden" th:id="${surveyCodes}" class="surveyCodes">
+<div class="wrapper">
+</div>
+<form class="delete" action="/deleteSurvey" method="post">
+    <div class="my-3">
+        <input type="hidden" id="surveyCode" name="surveyCode" th:value="${surveyCode}"required="true">
+        <label for="surveyPassword" class="form-label">Enter survey password:</label>
+        <input type="password" class="form-control" id="surveyPassword" name="surveyPassword"
+               required="true">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-secondary">Delete Survey</button>
+    </div>
+</form>
+</body>
+</html>

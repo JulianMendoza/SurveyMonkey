@@ -4,7 +4,7 @@ public class StoreAnswerHelper {
     private long questionId;
     private String answer;
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(long questionId) {
         this.questionId = questionId;
     }
 
