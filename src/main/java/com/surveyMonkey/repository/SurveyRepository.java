@@ -1,8 +1,8 @@
 package com.surveyMonkey.repository;
 
 import com.surveyMonkey.entities.Survey;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface SurveyRepository extends CrudRepository<Survey, Long> {
-    Survey findById(long id);
+
+public interface SurveyRepository extends MongoRepository<Survey, String> {
 }

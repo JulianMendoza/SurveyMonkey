@@ -1,14 +1,14 @@
 package com.surveyMonkey.util;
 
 public class StoreAnswerHelper {
-    private long questionId;
+    private String questionId;
     private String answer;
 
-    public void setQuestionId(long questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
-    public long getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 

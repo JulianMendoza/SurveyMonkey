@@ -1,5 +1,7 @@
 package com.surveyMonkey.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -7,13 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Document
 public class Answer implements Serializable {
 
     private static final long serialVersionUID = -6024463549612035738L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long answerId;
+    private String answerId;
     private String answer;
 
     public Answer() {

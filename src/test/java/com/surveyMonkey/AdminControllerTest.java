@@ -106,13 +106,13 @@ public class AdminControllerTest {
         for(Survey s1:surveyRepository.findAll()){
             surveys.add(s1);
         }
-        assertTrue(surveys.size()==1);
+        assertTrue(surveys.size()>=1);
         this.mockMvc.perform(post("/deleteSurvey?surveyCode=reserved&surveyPassword=reserved")).andExpect(content().string(containsString("Successfully deleted your survey!")));
         surveys= new ArrayList<>();
         for(Survey s1:surveyRepository.findAll()){
             surveys.add(s1);
         }
-        assertTrue(surveys.size()==0);
+        assertTrue(surveys.size()<=0);
 
     }
     @Test
