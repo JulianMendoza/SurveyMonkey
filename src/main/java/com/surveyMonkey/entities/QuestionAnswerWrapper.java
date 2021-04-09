@@ -1,15 +1,16 @@
 package com.surveyMonkey.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Document
 public class QuestionAnswerWrapper {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long qWrapperid;
+    private String qWrapperid;
     @OneToOne(cascade = CascadeType.ALL)
     private Question question;
     @OneToMany(targetEntity = Answer.class, cascade = CascadeType.ALL)
@@ -40,11 +41,11 @@ public class QuestionAnswerWrapper {
         return answers;
     }
 
-    public Long getqWrapperid() {
+    public String getqWrapperid() {
         return qWrapperid;
     }
 
-    public void setqWrapperid(Long qWrapperid) {
+    public void setqWrapperid(String qWrapperid) {
         this.qWrapperid = qWrapperid;
     }
 }
