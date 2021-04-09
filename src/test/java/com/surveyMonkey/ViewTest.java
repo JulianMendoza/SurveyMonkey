@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.htmlunit.MockMvcWebClientBuilder;
 import org.springframework.web.context.WebApplicationContext;
-import org.w3c.dom.html.HTMLButtonElement;
+
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -107,20 +107,6 @@ public class ViewTest {
         surveyRepository.delete(fts.getTestSurvey());
     }
 
-//    @Test
-//    public void testSubmissionPage() throws IOException {
-//        FakeTestSurvey fts = new FakeTestSurvey();
-//        surveyRepository.save(fts.getTestSurvey());
-//        String url = "http://localhost:8080/survey/reserved";
-//        HtmlPage page = webClient.getPage(url);
-//        System.out.println(page.asText());
-//        HtmlButton buttonElement = page.getHtmlElementById("storeAnswersId");
-//        HtmlPage page2 = buttonElement.click();
-//        System.out.println(page2.asText());
-//        webClient.waitForBackgroundJavaScript(2000);
-//        assertTrue(page2.getHtmlElementById("submissionId").isDisplayed());
-//        surveyRepository.delete(fts.getTestSurvey());
-    //}
 
 
 
