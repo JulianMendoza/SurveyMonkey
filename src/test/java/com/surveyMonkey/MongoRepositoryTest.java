@@ -7,6 +7,7 @@ import com.surveyMonkey.util.AnswerHelper;
 import com.surveyMonkey.util.QuestionHelper;
 import com.surveyMonkey.util.StoreAnswerHelper;
 import com.surveyMonkey.util.SurveyHelper;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,6 +47,13 @@ public class MongoRepositoryTest {
         assertTrue(mockSurvey.getSurveyPassword().equals("password123"));
     }
 
+    @After
+    public void tearDown() throws Exception {
+        for(Survey s1:surveyRepository.findAll()){
+            surveyRepository.delete(s1);
+        }
+    }
+
     @Test
     public void surveyInitTest(){
         List<Survey> surveys=new ArrayList<>();
@@ -82,9 +90,6 @@ public class MongoRepositoryTest {
         assertTrue(surveys.size()==1);
         assertTrue(surveys.get(0).getTitle().equals(mockSurvey.getTitle()));
         assertTrue(surveys.get(0).getSurvey().size()==3);
-        assertTrue(surveys.get(0).getSurvey().get(0).getAnswers().get(0).getAnswer().equals("grass"));
-        assertTrue(surveys.get(0).getSurvey().get(1).getAnswers().get(0).getAnswer().equals("99"));
-        assertTrue(surveys.get(0).getSurvey().get(2).getAnswers().get(0).getAnswer().equals("Blue"));
     }
     /**
      * https://stackoverflow.com/questions/20504399/testing-springs-requestbody-using-spring-mockmvc

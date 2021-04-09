@@ -112,7 +112,7 @@ public class AdminControllerTest {
         for(Survey s1:surveyRepository.findAll()){
             surveys.add(s1);
         }
-        assertTrue(surveys.size()==0);
+        assertTrue(surveys.size()<=0);
 
     }
 
