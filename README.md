@@ -11,6 +11,7 @@
 - Actual storage of survey answers.
 - Display available surveys on the homepage
 - Updated the README
+- Improve upon password-less survey result feature and some page interfaces
 - UML Diagrams
 - View/Template for the search survey result (currently JSON)
 - Survey Results Page
@@ -19,7 +20,7 @@
 
 
 ### In progress
-- Add survey results page
+- Repo cleanup for submission
 
 ### Backlog
 - None
