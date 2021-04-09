@@ -171,4 +171,9 @@ public class AdminController {
         return "deleteSurvey";
     }
     
+    @GetMapping({"/submissionPage"})
+    public String createSubmission(){
+        return "submission";
+    }
+    
 }
