@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#storeAnswersId").click(function () {
         if (validate()) {
             storingAnswers();
-            window.open("http://localhost:8080/submissionPage");
+            document.location.href="/submissionPage";
 
         } else {
             alert("Please make sure you fill the fields!");
