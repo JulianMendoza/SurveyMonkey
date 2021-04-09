@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -94,7 +95,7 @@ public class AdminControllerTest {
         DataRetrieval dr=new DataRetrieval();
         dr.setData(survey.getSurveyCode());
         String str = asJsonString(dr);
-        this.mockMvc.perform(post("/surveyResult").contentType(MediaType.APPLICATION_JSON).content(str))
+        this.mockMvc.perform(post("/surveyResultData").contentType(MediaType.APPLICATION_JSON).content(str))
                 .andExpect(content().string(containsString("What is life?")));
         surveyRepository.delete(survey);
     }
@@ -130,20 +131,6 @@ public class AdminControllerTest {
         }
     }
 
-    /**
-     * Test /surveyResultsWoPswrd endpoint with a valid survey code which requires no password
-     */
-    @Test
-    public void surveyResultsWoPswrdPageTest() throws Exception {
-        Survey survey = new Survey("test", "test");
-        System.out.println(survey.getSurveyCode());
-        surveyRepository.save(survey);
-        String url = "/surveyResultsWoPswrd?surveyCodes="+ survey.getSurveyCode() ;
-
-        this.mockMvc.perform(post(url)).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString(survey.getSurveyCode())));
-        surveyRepository.delete(survey);
-    }
 
     /**
      * Test /surveyResultsWithoutPassword endpoint with a survey
@@ -163,14 +150,58 @@ public class AdminControllerTest {
         surveyRepository.delete(survey);
     }
 
-	@Test
-	public void availableSurveyTest() throws Exception {
-		Survey survey = new Survey("Test Survey", "password");
-		survey.setSurveyCode("TestCode");
-		surveyRepository.save(survey);
-		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getTitle())));
-		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getSurveyCode())));
-		surveyRepository.delete(survey);
-	}
+    /**
+     * Test /public/{surveyCode} endpoint with a survey
+     */
+    @Test
+    public void makeSurveyPublicTest() throws Exception {
+        Survey survey = new Survey("test", "test");
+        surveyRepository.save(survey);
+        assert(survey.isPublic()==false);
+        this.mockMvc.perform(post("/public/" + survey.getSurveyCode() + "?password=test"))
+                .andExpect(content().string(containsString("Here is your public survey results link")));
+        surveyRepository.delete(survey);
+    }
+
+    /**
+     * Test /private/{surveyCode} endpoint with a survey
+     */
+    @Test
+    public void makeSurveyPrivateTest() throws Exception {
+        Survey survey = new Survey("test", "test");
+        survey.setPublic(true);
+        surveyRepository.save(survey);
+        assertTrue(survey.isPublic());
+        this.mockMvc.perform(post("/private/" + survey.getSurveyCode() + "?passwordPrivate=test"))
+                .andExpect(content().string(containsString("Survey Results successfully made private")));
+        surveyRepository.delete(survey);
+    }
+
+    /**
+     * Test /survey/results/{surveyCode} endpoint with a survey
+     */
+    @Test
+    public void getPublicSurveyPageTest() throws Exception {
+        Survey survey = new Survey("test", "test");
+        survey.setPublic(true);
+        surveyRepository.save(survey);
+        assertTrue(survey.isPublic());
+        this.mockMvc.perform(get("/survey/results/" + survey.getSurveyCode()))
+                .andExpect(content().string(containsString(survey.getTitle())));
+        surveyRepository.delete(survey);
+    }
+
+    @Test
+    public void availableSurveyTest() throws Exception {
+        Survey survey = new Survey("Test Survey", "password");
+        survey.setSurveyCode("TestCode");
+        surveyRepository.save(survey);
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getTitle())));
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getSurveyCode())));
+        surveyRepository.delete(survey);
+    }
+
+
 
 }
+

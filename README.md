@@ -3,41 +3,38 @@
 ## Current State as per the Kanban
 
 ### Completed
-- Weekly Scrum - March 22nd 2021
-- Show survey page tests
-- Randomly Generated Survey Code
-- Survey Display Page
-- survey Confirmation Page
+- Weekly Scrum - March 29nd 2021
+- Weekly Scrum - April 5th 2021
+- Use a NOSQL database (in accordance to our presentation topic)
+- Create survey result page but without password
+- Create a submission page that pops us after user submits survey answers
+- Actual storage of survey answers.
+- Display available surveys on the homepage
 - Updated the README
+- Improve upon password-less survey result feature and some page interfaces
 - UML Diagrams
-- Reformat Homepage
-- Backend Architecture
-- Configure entities
-- Implement Controllers
-- Form input
-- Dynamic input form
+- View/Template for the search survey result (currently JSON)
+- Survey Results Page
+- Fix known bugs & results page layout
+
 
 
 ### In progress
-- Add survey results page
+- Repo cleanup for submission
 
 ### Backlog
-- Fix known bugs and results page layout
+- None
 
 ### Plan for the next Sprint
-- Improve further on the Front End Design.
-- Implement the survey results page
-- More testing
-- Increase password utilization
+- None
 
-### Database Schema as of Milestone 2
+### Database Schema as of Milestone 3
 
 ![Database Schema](src/main/resources/static/images/survey_monkey_er_diagram.png)
 
 ### UML Class Diagram as of Milestone 3
 
 ![UML Class Diagram](https://user-images.githubusercontent.com/44556924/114176727-8e888880-9909-11eb-84a3-95bd71f6a109.png)
-
 
 ### Sequence Diagram as of Milestone 3
 

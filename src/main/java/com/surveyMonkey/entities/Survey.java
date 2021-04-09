@@ -23,6 +23,7 @@ public class Survey implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<QuestionAnswerWrapper> survey = new ArrayList<>();
     private String title;
+    private boolean isPublic;
     private String surveyCode;
     private String surveyPassword;
     private int SURVEY_CODE_LENGTH = 5;
@@ -34,6 +35,7 @@ public class Survey implements Serializable {
         setTitle(title);
         setSurveyPassword(password);
         setSurveyCode(createSurveyCode());
+        setPublic(false);
     }
 
     public void setQuestion(Question q) {
@@ -78,6 +80,14 @@ public class Survey implements Serializable {
 
     public void setSurveyPassword(String surveyPassword) {
         this.surveyPassword = surveyPassword;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 
     public String createSurveyCode() {
