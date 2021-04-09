@@ -7,3 +7,9 @@
 .delete{
     padding: 1em 10em 1em 10em;
 }
+.center{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2em;
+    padding-top: 2em;
+}
