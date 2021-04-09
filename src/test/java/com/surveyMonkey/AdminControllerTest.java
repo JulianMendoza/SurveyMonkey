@@ -94,23 +94,20 @@ public class AdminControllerTest {
 	}
 
 	@Test
-	public void deleteSurveyTest() throws Exception {
-		FakeTestSurvey s = new FakeTestSurvey();
-		surveyRepository.save(s.getTestSurvey());
-		List<Survey> surveys = new ArrayList<>();
-		for (Survey s1 : surveyRepository.findAll()) {
-			surveys.add(s1);
-		}
-		System.out.println(surveys.size());
-		assertTrue(surveys.size() >= 1);
-		this.mockMvc.perform(post("/deleteSurvey?surveyCode=reserved&surveyPassword=reserved")).andExpect(content().string(containsString("Successfully deleted your survey!")));
-		surveys = new ArrayList<>();
-		for (Survey s1 : surveyRepository.findAll()) {
-			surveys.add(s1);
-		}
-		assertTrue(surveys.size() <= 0);
+    	public void deleteSurveyTest() throws Exception {
+        	List<Survey> surveys= new ArrayList<>();
+        	for(Survey s1:surveyRepository.findAll()){
+           		 surveys.add(s1);
+        	}
+        	assertTrue(surveys.size()==1);
+        	this.mockMvc.perform(post("/deleteSurvey?surveyCode=reserved&surveyPassword=reserved")).andExpect(content().string(containsString("Successfully deleted your survey!")));
+        	surveys= new ArrayList<>();
+        	for(Survey s1:surveyRepository.findAll()){
+            		surveys.add(s1);
+        	}
+        	assertTrue(surveys.size()==0);
 
-	}
+    }
 
 	/**
 	 * https://stackoverflow.com/questions/20504399/testing-springs-requestbody-using-spring-mockmvc
