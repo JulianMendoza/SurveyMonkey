@@ -6,11 +6,10 @@ $(document).ready(() => {
     if (surveyCode.data !== undefined) {
         let div = document.createElement("div");
         div.setAttribute("id", "results");
-        div.innerHTML = "Here are your results!";
         $('.wrapper').append(div);
         $.ajax({
             type: "POST",
-            url: "/surveyResult",
+            url: "/surveyResultData",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(surveyCode),
             dataType: 'json',
@@ -54,10 +53,10 @@ function goBack() {
  */
 function createOpenEndedView(question, answers) {
     let table = document.createElement("table");
-    table.setAttribute("class", "table table-bordered");
+    table.setAttribute("class", "table mb-5 table-bordered");
     let tableTitle = document.createElement("th");
     tableTitle.setAttribute("colspan", "2");
-    let title = document.createElement("h3");
+    let title = document.createElement("h4");
     title.append(question.question);
     tableTitle.append(title);
     let head = document.createElement("thead");
@@ -83,7 +82,7 @@ function createOpenEndedView(question, answers) {
  */
 function createHistogramView(question, answers) {
     let div = document.createElement("div");
-    div.setAttribute("class", "chart");
+    div.setAttribute("class", "chart mb-5");
     let canvas = document.createElement("canvas");
     canvas.setAttribute("id", "histo" + question.questionId);
     div.append(canvas);
@@ -111,6 +110,7 @@ function createHistogramView(question, answers) {
             title: {
                 display: true,
                 text: question.question,
+                fontSize: 20
             },
             scales: {
                 yAxes: [{
@@ -138,7 +138,7 @@ function createHistogramView(question, answers) {
  */
 function createOptionView(question, answers) {
     let div = document.createElement("div");
-    div.setAttribute("class", "chart");
+    div.setAttribute("class", "chart mb-0 pb-0");
     let canvas = document.createElement("canvas");
     canvas.setAttribute("id", "option" + question.questionId);
     div.append(canvas);
@@ -179,6 +179,7 @@ function createOptionView(question, answers) {
             title: {
                 display: true,
                 text: question.question,
+                fontSize: 20
             },
         },
         data: {

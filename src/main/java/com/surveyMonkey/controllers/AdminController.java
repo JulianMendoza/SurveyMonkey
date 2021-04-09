@@ -65,26 +65,67 @@ public class AdminController {
 
     @PostMapping({"/surveyResults"})
     public String surveyResult(@RequestParam("surveyCode") String surveyCode, @RequestParam("surveyPassword") String surveyPassword, Model model) {
-        for(Survey survey:surveyRepository.findAll()){
-            if(survey.getSurveyCode().equals(surveyCode)&&survey.getSurveyPassword().equals(surveyPassword)){
+        Survey survey = new Survey();
+        for(Survey s:surveyRepository.findAll()){
+            if(s.getSurveyCode().equals(surveyCode) && s.getSurveyPassword().equals(surveyPassword)){
+                survey = s;
                 model.addAttribute("surveyCode", surveyCode);
                 break;
             }
         }
+        model.addAttribute("survey", survey);
+        model.addAttribute("madePrivate", false);
         return "results";
     }
 
-    @PostMapping({"/surveyResultsWoPswrd"})
-    public String surveyResultWoPswrd(@RequestParam("surveyCodes") String surveyCode, Model model) {
-        for(Survey survey:surveyRepository.findAll()){
-            if(survey.getSurveyCode().equals(surveyCode)){
-                model.addAttribute("surveyCodes", surveyCode);
+    @PostMapping({"/public/{surveyCode}"})
+    public String makePublic(@PathVariable String surveyCode, @RequestParam("password") String surveyPassword, Model model) {
+        Survey survey = new Survey();
+        for(Survey s:surveyRepository.findAll()){
+            if(s.getSurveyCode().equals(surveyCode) && s.getSurveyPassword().equals(surveyPassword)){
+                survey = s;
+                survey.setPublic(true);
+                surveyRepository.save(survey);
                 break;
             }
         }
+        model.addAttribute("survey", survey);
+        model.addAttribute("surveyCode", surveyCode);
+
+        return "public-success";
+    }
+
+    @PostMapping({"/private/{surveyCode}"})
+    public String makePrivate(@PathVariable String surveyCode, @RequestParam("passwordPrivate") String surveyPassword, Model model) {
+        Survey survey = new Survey();
+        for(Survey s:surveyRepository.findAll()){
+            if(s.getSurveyCode().equals(surveyCode) && s.getSurveyPassword().equals(surveyPassword)){
+                survey = s;
+                survey.setPublic(false);
+                surveyRepository.save(survey);
+                break;
+            }
+        }
+        model.addAttribute("survey", survey);
+        model.addAttribute("surveyCode", surveyCode);
+        model.addAttribute("madePrivate", true);
+        return "results";
+    }
+
+    @GetMapping("/survey/results/{surveyCode}")
+    public String showSurveyResults(@PathVariable String surveyCode, Model model) {
+        Survey survey = new Survey();
+        for (Survey s : surveyRepository.findAll()) {
+            if (s.getSurveyCode().equals(surveyCode) && s.isPublic()) {
+                survey = s;
+            }
+        }
+        model.addAttribute(survey);
+        model.addAttribute("surveyCode", surveyCode);
         return "resultswithnoPswrd";
     }
-    @PostMapping({"/surveyResult"})
+
+    @PostMapping({"/surveyResultData"})
     @ResponseBody
     public List<QuestionAnswerWrapper> surveyResult(@RequestBody DataRetrieval dataRetrieval) {
         for (Survey survey : surveyRepository.findAll()) {

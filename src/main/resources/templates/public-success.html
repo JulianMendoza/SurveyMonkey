@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<head>
+    <title>Survey Monkey</title>
+
+    <script src="jquery.min.js"></script>
+    <script src="questionForm.js"></script>
+</head>
+<body>
+<div class="container text-center mt-5 pt-5">
+    <div class="card p-5" style="border: solid 1px green; border-radius: 3px">
+        <div class="row px-5"><h1 th:text="${survey.getTitle() + ' survey results made public !'}"></h1></div>
+        <div class="row my-4 row px-5"><h4> Here is your public survey results link</h4></div>
+        <div class="row row px-5"><p class="text-muted text-small">Share this</p></div>
+        <div class="row my-4 row px-5">
+            <div class="input-group mb-3">
+                <input th:value="${'https://surveymonkey4806.herokuapp.com/survey/results/' + surveyCode}" type="text"
+                       id="copy" style="border: solid 1px green; border-radius: 3px"
+                       class="form-control-plaintext px-3" aria-label="Survey Link"
+                       aria-describedby="survey-link" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+</body>
+</html>

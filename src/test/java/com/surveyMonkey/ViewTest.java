@@ -87,7 +87,7 @@ public class ViewTest {
         HtmlButton button = page.getHtmlElementById("search");
         HtmlPage page2 = button.click();
         webClient.waitForBackgroundJavaScript(2000);
-        assertTrue(page2.asText().contains("Sorry, your survey or survey password is incorrect!"));
+        assertTrue(page2.asText().contains("Sorry, wrong password or non-existent survey"));
         surveyRepository.delete(fts.getTestSurvey());
     }
     @Test
