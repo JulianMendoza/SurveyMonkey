@@ -4,6 +4,7 @@ import static com.surveyMonkey.util.Constants.HISTOGRAM;
 import static com.surveyMonkey.util.Constants.OPEN_ENDED;
 import static com.surveyMonkey.util.Constants.OPTION;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.surveyMonkey.util.*;
@@ -29,11 +30,19 @@ import com.surveyMonkey.repository.SurveyRepository;
 public class AdminController {
     @Autowired
     private SurveyRepository surveyRepository;
-
+    private boolean found=false;
     @GetMapping({"/"})
     public String home(Model model) {
-        FakeTestSurvey survey = new FakeTestSurvey();
-        surveyRepository.save(survey.getTestSurvey());
+        if(!found) {
+            FakeTestSurvey survey = new FakeTestSurvey();
+            surveyRepository.save(survey.getTestSurvey());
+            this.found=true;
+        }
+        List<Survey> surveys=new ArrayList<>();
+        for(Survey s:surveyRepository.findAll()){
+            surveys.add(s);
+        }
+        model.addAttribute("surveys",surveys);
         return "index";
     }
 
@@ -41,9 +50,6 @@ public class AdminController {
     public String createSurvey() {
         return "creation";
     }
-
-    @GetMapping({"/submissionPage"})
-    public String createSubmission(){return "submission";}
 
     @GetMapping({"/surveyQuestions"})
     public String createQuestions(@RequestParam("title") String title, Model model) {
@@ -158,5 +164,5 @@ public class AdminController {
         }
         return "deleteSurvey";
     }
-
+    
 }
