@@ -99,21 +99,19 @@ public class AdminControllerTest {
                 .andExpect(content().string(containsString("What is life?")));
         surveyRepository.delete(survey);
     }
-    @Test
-    public void deleteSurveyTest() throws Exception {
-        FakeTestSurvey s=new FakeTestSurvey();
-        surveyRepository.save(s.getTestSurvey());
+   @Test
+   public void deleteSurveyTest() throws Exception {
         List<Survey> surveys= new ArrayList<>();
         for(Survey s1:surveyRepository.findAll()){
             surveys.add(s1);
         }
-        assertTrue(surveys.size()>=1);
+        assertTrue(surveys.size()==1);
         this.mockMvc.perform(post("/deleteSurvey?surveyCode=reserved&surveyPassword=reserved")).andExpect(content().string(containsString("Successfully deleted your survey!")));
         surveys= new ArrayList<>();
         for(Survey s1:surveyRepository.findAll()){
             surveys.add(s1);
         }
-        assertTrue(surveys.size()<=0);
+        assertTrue(surveys.size()==0);
 
     }
     @Test
@@ -193,4 +191,17 @@ public class AdminControllerTest {
         surveyRepository.delete(survey);
     }
 
+    @Test
+    public void availableSurveyTest() throws Exception {
+        Survey survey = new Survey("Test Survey", "password");
+        survey.setSurveyCode("TestCode");
+        surveyRepository.save(survey);
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getTitle())));
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(survey.getSurveyCode())));
+        surveyRepository.delete(survey);
+    }
+
+
+
 }
+

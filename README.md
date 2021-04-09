@@ -33,7 +33,7 @@
 
 ### UML Class Diagram as of Milestone 3
 
-![UML Class Diagram](src/main/resources/static/images/uml.png)
+![UML Class Diagram](https://user-images.githubusercontent.com/44556924/114176727-8e888880-9909-11eb-84a3-95bd71f6a109.png)
 
 ### Sequence Diagram as of Milestone 3
 
