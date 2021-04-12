@@ -4,7 +4,7 @@ before_install:
 deploy:
   provider: heroku
   api-key: $HEROKU_API_KEY
-  app: surveymonkey4806
+  app: surveymonkeyknockoff
   on:
     all_branches: true
   skip_cleanup: true
