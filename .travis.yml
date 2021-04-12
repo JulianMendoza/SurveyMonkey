@@ -4,5 +4,6 @@ deploy:
   provider: heroku
   api-key: $HEROKU_API_KEY
   app: surveymonkeyknockoff
-  branch: main
+  on:
+     branch: main
 dist: trusty
