@@ -177,12 +177,6 @@ public class AdminController {
     @PostMapping({"/answersStored"})
     @ResponseBody
     public void answerLinkedQuestion(@RequestBody AnswerHelper answerHelper) {
-        System.out.println(answerHelper.getSurveyCode());
-        System.out.println(answerHelper.getAnsweredStored().get(0));
-        System.out.println(answerHelper.getAnsweredStored().get(0).getAnswer());
-        System.out.println(answerHelper.getAnsweredStored().get(0).getQuestionId());
-
-
         for (Survey s : surveyRepository.findAll()) {
             if (s.getSurveyCode().equals(answerHelper.getSurveyCode())) {
                 for (int i = 0; i < answerHelper.getAnsweredStored().size(); i++) {

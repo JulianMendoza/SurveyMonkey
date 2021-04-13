@@ -144,8 +144,6 @@ function createOptionView(question, answers) {
     div.append(canvas);
     $('.wrapper').append(div);
     let labels = [];
-    console.log(question);
-    console.log(answers);
     for (option in question.options) {
         labels.push(question.options[option]);
     }

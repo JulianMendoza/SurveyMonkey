@@ -32,7 +32,6 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<!--    <script src="requestResults.js"></script>-->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
 
@@ -176,14 +175,12 @@
      */
     function createOptionView(question, answers) {
         let div = document.createElement("div");
-        div.setAttribute("class", "chart mb-0 pb-0");
+        div.setAttribute("class", "chart");
         let canvas = document.createElement("canvas");
         canvas.setAttribute("id", "option" + question.questionId);
         div.append(canvas);
         $('.wrapper').append(div);
         let labels = [];
-        console.log(question);
-        console.log(answers);
         for (option in question.options) {
             labels.push(question.options[option]);
         }
@@ -228,8 +225,6 @@
                 }],
             },
         });
-
-
     }
 </script>
 </body>
