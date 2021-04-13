@@ -211,7 +211,7 @@
      */
     function createHistogramView(question, answers) {
         let div = document.createElement("div");
-        div.setAttribute("class", "chart mb-5");
+        div.setAttribute("class", "chart");
         let canvas = document.createElement("canvas");
         canvas.setAttribute("id", "histo" + question.questionId);
         div.append(canvas);
@@ -267,7 +267,7 @@
      */
     function createOptionView(question, answers) {
         let div = document.createElement("div");
-        div.setAttribute("class", "chart mb-0 pb-0");
+        div.setAttribute("class", "chart");
         let canvas = document.createElement("canvas");
         canvas.setAttribute("id", "option" + question.questionId);
         div.append(canvas);
