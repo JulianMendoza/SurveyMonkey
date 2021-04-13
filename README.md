@@ -1,6 +1,6 @@
 # SurveyMonkeyKnockoff
 
-[![Build Status](https://travis-ci.com/JulianMendoza/SurveyMonkey.svg?branch=main&status=started)
+![Build Status](https://travis-ci.com/JulianMendoza/SurveyMonkey.svg?branch=main&status=started)
 
 Original repo: https://github.com/oyenmwen/SurveyMonkey
 
